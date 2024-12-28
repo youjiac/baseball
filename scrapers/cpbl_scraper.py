@@ -89,9 +89,8 @@ class CPBLScraper:
         }
 
         try:
-            # Debug 輸出
-            st.write(f"目前處理的球隊代碼: {self.current_team_code}")
-            st.write(f"成立年份對照表: {team_established_years}")
+            self.logger.debug(f"目前處理的球隊代碼: {self.current_team_code}")
+            self.logger.debug(f"成立年份對照表: {team_established_years}")
             
             team_brief = soup.find('div', class_='TeamBrief')
             if team_brief:
@@ -107,8 +106,7 @@ class CPBLScraper:
                 # 從球隊代碼查詢成立年份
                 info['established'] = team_established_years.get(self.current_team_code, 'N/A')
                 
-                # Debug 輸出
-                st.write(f"設置的成立年份: {info['established']}")
+                self.logger.debug(f"設置的成立年份: {info['established']}")
                 
                 # 解析其他資訊
                 for item in team_brief.find_all('dd'):
@@ -125,10 +123,8 @@ class CPBLScraper:
                             
         except Exception as e:
             self.logger.error(f"解析球隊資訊時發生錯誤: {str(e)}")
-            st.error(f"解析球隊資訊錯誤: {str(e)}")
             
         return info
-
     def _parse_category(self, soup, category):
         """解析特定類別的球員"""
         players = []
