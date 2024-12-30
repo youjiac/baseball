@@ -1,10 +1,9 @@
-from typing import Dict, Optional
+# app/models/baseball_llm.py
 import logging
-from langchain.llms import Ollama
-from langchain.prompts import PromptTemplate
-from langchain.chains import LLMChain
-import re
+from typing import Dict
+import ollama
 
+# 設置日誌記錄
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
@@ -14,89 +13,84 @@ class BaseballLLM:
         self.data = {}
         self.initialized = False
         try:
-            # 初始化 Ollama 模型
-            self.llm = Ollama(model="llama2")
-            # 定義提示模板
-            self.prompt_template = PromptTemplate(
-                input_variables=["context", "query"],
-                template="""
-                你是一個專業的棒球教練助手，擅長回答關於中華職棒的問題。
-                
-                你有以下資訊可以參考：
-                {context}
-                
-                請根據以上資訊回答問題：
-                {query}
-                
-                如果問題涉及數值計算，請明確列出計算步驟。
-                """
-            )
-            self.chain = LLMChain(llm=self.llm, prompt=self.prompt_template)
-            self.llm_initialized = True
-            logger.info("LLM 初始化成功")
+            self.initialized = True
+            logger.info("LLM 系統初始化成功")
         except Exception as e:
             logger.error(f"LLM 初始化失敗: {str(e)}")
-            self.llm_initialized = False
-        
+
     def initialize_knowledge(self, baseball_data: Dict) -> bool:
         """初始化知識庫"""
         try:
-            self.data = baseball_data
-            self.initialized = True
+            self.data = self._format_data_for_llm(baseball_data)
+            logger.info("知識庫初始化成功")
             return True
         except Exception as e:
             logger.error(f"知識庫初始化失敗: {str(e)}")
             return False
 
-    def extract_numbers(self, text: str) -> list:
-        """從文字中提取數字"""
-        numbers = re.findall(r'\d+\.?\d*', text)
-        return [float(num) for num in numbers]
+    def _format_data_for_llm(self, data: Dict) -> str:
+        """將球隊資料格式化為LLM易理解的形式"""
+        try:
+            formatted_data = []
+            for team_id, team_info in data.items():
+                team_info = team_info.get('team_info', {})
+                players = data[team_id].get('players', {})
+                
+                team_data = [
+                    f"【{team_info.get('name', '未知球隊')}】",
+                    f"主場: {team_info.get('home', '未知')}",
+                    f"總教練: {team_info.get('coach', '未知')}",
+                    "\n球員名單:"
+                ]
 
-    def handle_calculation(self, question: str) -> Optional[str]:
-        """處理數值計算"""
-        # 打擊率計算
-        if "打擊率" in question:
-            numbers = self.extract_numbers(question)
-            if len(numbers) >= 2:
-                hits, at_bats = numbers[:2]
-                avg = hits / at_bats if at_bats > 0 else 0
-                return f"打擊率計算：{hits} 支安打 / {at_bats} 打數 = {avg:.3f}"
-        
-        # 防禦率計算
-        if "防禦率" in question:
-            numbers = self.extract_numbers(question)
-            if len(numbers) >= 2:
-                earned_runs, innings = numbers[:2]
-                era = (earned_runs * 9) / innings if innings > 0 else 0
-                return f"防禦率計算：({earned_runs} * 9) / {innings} 局 = {era:.2f}"
-        
-        return None
+                for category, title in [
+                    ('pitchers', '投手'),
+                    ('catchers', '捕手'),
+                    ('infielders', '內野手'),
+                    ('outfielders', '外野手')
+                ]:
+                    if category_players := players.get(category):
+                        team_data.append(f"\n{title}:")
+                        for player in category_players:
+                            team_data.append(
+                                f"- {player.get('name', '未知')} "
+                                f"(背號: {player.get('number', '未知')}, "
+                                f"位置: {player.get('position', '未知')})"
+                            )
+
+                formatted_data.append("\n".join(team_data))
+
+            return "\n\n===\n\n".join(formatted_data)
+        except Exception as e:
+            logger.error(f"資料格式化失敗: {str(e)}")
+            return "資料格式化失敗"
 
     def query(self, question: str) -> str:
         """處理查詢"""
         try:
-            # 檢查是否需要數值計算
-            calculation_result = self.handle_calculation(question)
-            if calculation_result:
-                return calculation_result
+            # 基本問候
+            if any(greeting in question.lower() for greeting in ["你好", "哈囉", "嗨", "hi", "hello"]):
+                return "你好！我是CPBL教練助手，我有中華職棒所有球隊的最新資料。您想了解什麼呢？"
 
-            # 基於規則的快速回應
-            response = self._rule_based_response(question)
-            if response:
-                return response
+            if not self.initialized:
+                return "系統尚未準備就緒，請稍後再試。"
+
+            prompt = f"""你是CPBL教練助手，請根據以下資料回答問題。請簡潔專業，像教練回答球迷提問。
+
+資料：
+{self.data}
+
+問題：{question}
+
+請直接回答："""
+
+            response = ollama.chat(
+                model='mistral',
+                messages=[{'role': 'user', 'content': prompt}]
+            )
             
-            # 如果有初始化 LLM，使用 LLM 生成回應
-            if self.llm_initialized:
-                context = str(self.data)  # 可以優化成更結構化的內容
-                response = self.chain.run(context=context, query=question)
-                return response
-                
-            # 如果都沒有匹配，返回預設回應
-            return "我建議您詢問更具體的球隊、球員相關資訊，或是進行數據計算。"
-            
+            return response['message']['content']
+
         except Exception as e:
             logger.error(f"查詢處理失敗: {str(e)}")
-            return f"抱歉，我現在無法回答這個問題。"
-
-    # [保持原有的 _rule_based_response 方法不變]
+            return "系統處理出現問題，請稍後再試。"

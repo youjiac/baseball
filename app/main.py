@@ -14,6 +14,10 @@ from models.baseball_llm import BaseballLLM
 from models.calculator import BaseballCalculator
 from models.player_stats import PlayerStats
 from scrapers.cpbl_scraper import CPBLScraper
+from speech.speech_processor import SpeechProcessor
+
+
+
 
 # 設置日誌記錄
 logging.basicConfig(level=logging.INFO)
@@ -28,6 +32,7 @@ class BaseballCoach:
             self.player_stats = PlayerStats()
             self.scraper = self._init_scraper()
             self.llm_assistant = BaseballLLM()
+            self.speech_processor = SpeechProcessor()  # 添加這行
             self.load_data()
             if hasattr(self, 'data'):
                 self.llm_assistant.initialize_knowledge(self.data)
@@ -124,28 +129,47 @@ class BaseballCoach:
         if "messages" not in st.session_state:
             st.session_state.messages = []
 
-        # 顯示聊天歷史
-        for message in st.session_state.messages:
+        # 語音輸入按鈕
+        col1, col2 = st.columns([3, 1])
+        with col2:
+            if st.button("🎤 語音輸入"):
+                with st.spinner("正在聆聽..."):
+                    try:
+                        text = self.speech_processor.speech_to_text()
+                        if text:
+                            st.success(f"識別到: {text}") 
+                            st.session_state.messages.append({"role": "user", "content": text})
+                            st.rerun()
+                    except Exception as e:
+                        st.error(f"語音輸入失敗: {str(e)}")
+
+        # 文字輸入
+        with col1:
+            if prompt := st.chat_input("請輸入您的問題或使用語音輸入"):
+                st.session_state.messages.append({"role": "user", "content": prompt})
+
+        # 顯示對話歷史
+        for i, message in enumerate(st.session_state.messages):
             with st.chat_message(message["role"]):
                 st.markdown(message["content"])
+                
+                # 為助手回應添加語音播放選項
+                if message["role"] == "assistant":
+                    if st.button("🔊", key=f"play_{i}"):
+                        audio_file = self.speech_processor.text_to_speech(message["content"])
+                        if audio_file:
+                            st.audio(audio_file)
+                            # 清理暫存檔案
+                            self.speech_processor.cleanup()
 
-        # 用戶輸入
-        if prompt := st.chat_input("請輸入您的問題"):
-            st.session_state.messages.append({"role": "user", "content": prompt})
-            
-            with st.chat_message("user"):
-                st.markdown(prompt)
-
+        # 處理最新的用戶輸入
+        if st.session_state.messages and st.session_state.messages[-1]["role"] == "user":
+            prompt = st.session_state.messages[-1]["content"]
             with st.chat_message("assistant"):
-                try:
+                with st.spinner("教練正在思考中..."):  # 添加更明確的加載提示
                     response = self.llm_assistant.query(prompt)
                     st.markdown(response)
-                except Exception as e:
-                    error_msg = "抱歉，處理您的問題時發生錯誤。請稍後再試。"
-                    st.error(error_msg)
-                    response = error_msg
-                
-            st.session_state.messages.append({"role": "assistant", "content": response})
+                    st.session_state.messages.append({"role": "assistant", "content": response})
     def main_page(self):
         """主頁面"""
         try:
