@@ -10,14 +10,11 @@ from plotly.subplots import make_subplots
 import numpy as np
 from bs4 import BeautifulSoup
 import logging
-from models.baseball_llm import BaseballLLM
+from models.baseball_llm import BaseballLLM, ModelNotReadyError, QueryProcessingError
 from models.calculator import BaseballCalculator
 from models.player_stats import PlayerStats
 from scrapers.cpbl_scraper import CPBLScraper
 from speech.speech_processor import SpeechProcessor
-
-
-
 
 # 設置日誌記錄
 logging.basicConfig(level=logging.INFO)
@@ -31,8 +28,8 @@ class BaseballCoach:
             self.calculator = BaseballCalculator()
             self.player_stats = PlayerStats()
             self.scraper = self._init_scraper()
-            self.llm_assistant = BaseballLLM()
-            self.speech_processor = SpeechProcessor()  # 添加這行
+            self.llm_assistant = self._init_llm()
+            self.speech_processor = SpeechProcessor()
             self.load_data()
             if hasattr(self, 'data'):
                 self.llm_assistant.initialize_knowledge(self.data)
@@ -52,6 +49,18 @@ class BaseballCoach:
         except Exception as e:
             logger.error(f"Scraper 初始化失敗: {str(e)}")
             raise
+        
+    @staticmethod
+    @st.cache_resource
+    def _init_llm():
+        """初始化並快取 LLM 實例"""
+        try:
+            llm = BaseballLLM()
+            logger.info("LLM 初始化成功")
+            return llm
+        except Exception as e:
+            logger.warning(f"LLM 初始化失敗，切換到離線模式: {str(e)}")
+            return BaseballLLM()  # 返回一個未初始化的實例，將在離線模式運行
 
     def load_data(self):
         """載入球隊資料"""
@@ -128,11 +137,16 @@ class BaseballCoach:
         
         if "messages" not in st.session_state:
             st.session_state.messages = []
+            # 添加歡迎訊息
+            st.session_state.messages.append({
+                "role": "assistant",
+                "content": "歡迎使用CPBL教練助手！我可以幫您查詢球隊資訊、分析數據，以及回答棒球相關問題。請問有什麼我可以幫您的嗎？"
+            })
 
         # 語音輸入按鈕
         col1, col2 = st.columns([3, 1])
         with col2:
-            if st.button("🎤 語音輸入"):
+            if st.button("🎤 語音輸入", key="voice_input"):
                 with st.spinner("正在聆聽..."):
                     try:
                         text = self.speech_processor.speech_to_text()
@@ -166,14 +180,41 @@ class BaseballCoach:
         if st.session_state.messages and st.session_state.messages[-1]["role"] == "user":
             prompt = st.session_state.messages[-1]["content"]
             with st.chat_message("assistant"):
-                with st.spinner("教練正在思考中..."):  # 添加更明確的加載提示
-                    response = self.llm_assistant.query(prompt)
-                    st.markdown(response)
-                    st.session_state.messages.append({"role": "assistant", "content": response})
+                with st.spinner("教練正在思考中..."):
+                    try:
+                        response = self.llm_assistant.query(prompt)
+                        st.markdown(response)
+                        st.session_state.messages.append({
+                            "role": "assistant",
+                            "content": response
+                        })
+                    except ModelNotReadyError:
+                        error_message = "系統尚未準備就緒，請稍後再試。"
+                        st.error(error_message)
+                        st.session_state.messages.append({
+                            "role": "assistant",
+                            "content": error_message
+                        })
+                    except QueryProcessingError as e:
+                        error_message = f"處理查詢時發生錯誤: {str(e)}"
+                        st.error(error_message)
+                        st.session_state.messages.append({
+                            "role": "assistant",
+                            "content": error_message
+                        })
+                    except Exception as e:
+                        error_message = "非常抱歉，系統遇到了意外問題。請稍後再試。"
+                        logger.error(f"未預期的錯誤: {str(e)}", exc_info=True)
+                        st.error(error_message)
+                        st.session_state.messages.append({
+                            "role": "assistant",
+                            "content": error_message
+                        })
+
     def main_page(self):
         """主頁面"""
         try:
-            st.title("🏟️ CPBL 教練助手")
+            st.title("CPBL 教練助手")
             
             # 側邊欄選單
             with st.sidebar:
@@ -186,16 +227,12 @@ class BaseballCoach:
 
             # 根據選擇顯示不同頁面
             if page == "智能助手":
-                st.write("載入智能助手...")
                 self.chat_interface()
             elif page == "球隊分析":
-                st.write("載入球隊分析...")
                 self.team_analysis()
             elif page == "球員查詢":
-                st.write("載入球員查詢...")
                 self.player_search()
             elif page == "數據統計":
-                st.write("載入數據統計...")
                 self.statistics()
                 
         except Exception as e:
@@ -588,9 +625,9 @@ class BaseballCoach:
             st.success(f"打擊率: {avg:.3f}")
             
             if avg >= 0.300:
-                st.info("🌟 表現優異！")
+                st.info("表現優異！")
             elif avg >= 0.250:
-                st.info("⚾ 穩定表現")
+                st.info("穩定表現")
             else:
                 st.info("需要加強")
 
@@ -610,7 +647,7 @@ class BaseballCoach:
             if era < 3.00:
                 st.info("🌟 王牌投手等級！")
             elif era < 4.00:
-                st.info("⚾ 優秀表現")
+                st.info("優秀表現")
             else:
                 st.info("仍有進步空間")
 
@@ -638,7 +675,7 @@ class BaseballCoach:
             st.success(f"預測勝率: {prediction:.1%}")
             
             if prediction > 0.6:
-                st.info("📈 球隊近期狀態優異！")
+                st.info("球隊近期狀態優異！")
             elif prediction > 0.4:
                 st.info("⚖️ 球隊表現穩定")
             else:
@@ -650,7 +687,6 @@ def main():
         # 設定頁面配置
         st.set_page_config(
             page_title="CPBL 教練助手",
-            page_icon="⚾",
             layout="wide"
         )
 
