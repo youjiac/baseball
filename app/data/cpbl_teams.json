@@ -1,12 +1,6 @@
 {
   "ACN": {
-    "team_info": {
-      "name": "中信兄弟",
-      "history": "兄弟象(1990-2013) – 中信兄弟(2014 - 至今)",
-      "established": "1990",
-      "coach": "平野恵一",
-      "home": "台中洲際棒球場"
-    },
+    "team_info": null,
     "players": {
       "coaches": [
         {
@@ -244,16 +238,13 @@
           "position": "中外野手"
         }
       ]
-    }
+    },
+    "record": {},
+    "venue_stats": {},
+    "trends": []
   },
   "ADD": {
-    "team_info": {
-      "name": "統一7-ELEVEn獅",
-      "history": "統一獅(1990-2007) – 統一7-ELEVEn獅(2008 - 至今 )",
-      "established": "1990",
-      "coach": "林岳平",
-      "home": "台南棒球場"
-    },
+    "team_info": null,
     "players": {
       "coaches": [
         {
@@ -497,16 +488,13 @@
           "position": "右外野手"
         }
       ]
-    }
+    },
+    "record": {},
+    "venue_stats": {},
+    "trends": []
   },
   "AJL": {
-    "team_info": {
-      "name": "樂天桃猿",
-      "history": "第一金剛(2003) – La new熊(2004-2010) – Lamigo 桃猿(2011-2019) – 樂天桃猿(2020 - 至今)",
-      "established": "2003",
-      "coach": "古久保健二",
-      "home": "桃園國際棒球場"
-    },
+    "team_info": null,
     "players": {
       "coaches": [
         {
@@ -744,16 +732,13 @@
           "position": "中外野手"
         }
       ]
-    }
+    },
+    "record": {},
+    "venue_stats": {},
+    "trends": []
   },
   "AEO": {
-    "team_info": {
-      "name": "富邦悍將",
-      "history": "俊國熊(1993-1995) – 興農熊(1996上半季) – 興農牛(1996下半季 – 2012) – 義大犀牛(2013-2016) – 富邦悍將(2017 - 至今)",
-      "established": "1993",
-      "coach": "陳金鋒",
-      "home": "新莊棒球場"
-    },
+    "team_info": null,
     "players": {
       "coaches": [
         {
@@ -977,16 +962,13 @@
           "position": "中外野手"
         }
       ]
-    }
+    },
+    "record": {},
+    "venue_stats": {},
+    "trends": []
   },
   "AAA": {
-    "team_info": {
-      "name": "味全龍",
-      "history": "味全龍(1990-1999, 2019 - 至今)",
-      "established": "1990",
-      "coach": "葉君璋",
-      "home": "天母棒球場"
-    },
+    "team_info": null,
     "players": {
       "coaches": [
         {
@@ -1216,16 +1198,13 @@
           "position": "中外野手"
         }
       ]
-    }
+    },
+    "record": {},
+    "venue_stats": {},
+    "trends": []
   },
   "AKP": {
-    "team_info": {
-      "name": "台鋼雄鷹",
-      "history": "TSG Hawks(2023 - Now)",
-      "established": "2023",
-      "coach": "洪一中",
-      "home": "高雄市立澄清湖棒球場"
-    },
+    "team_info": null,
     "players": {
       "coaches": [
         {
@@ -1443,6 +1422,9 @@
           "position": "左外野手"
         }
       ]
-    }
+    },
+    "record": {},
+    "venue_stats": {},
+    "trends": []
   }
 }

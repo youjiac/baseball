@@ -15,6 +15,8 @@ from models.calculator import BaseballCalculator
 from models.player_stats import PlayerStats
 from scrapers.cpbl_scraper import CPBLScraper
 from speech.speech_processor import SpeechProcessor
+import requests
+
 
 # 設置日誌記錄
 logging.basicConfig(level=logging.INFO)
@@ -30,12 +32,24 @@ class BaseballCoach:
             self.scraper = self._init_scraper()
             self.llm_assistant = self._init_llm()
             self.speech_processor = SpeechProcessor()
-            self.load_data()
+            
+            try:
+                self.load_data()
+            except Exception as e:
+                st.error(f"載入資料時發生錯誤: {str(e)}")
+                self.data = {}  # 確保有一個空的資料結構
+                
+            # 即使資料載入失敗，也初始化 LLM
             if hasattr(self, 'data'):
-                self.llm_assistant.initialize_knowledge(self.data)
+                try:
+                    self.llm_assistant.initialize_knowledge(self.data)
+                except Exception as e:
+                    st.error(f"初始化知識庫時發生錯誤: {str(e)}")
+                    
             logger.info("BaseballCoach 初始化成功")
         except Exception as e:
             logger.error(f"BaseballCoach 初始化失敗: {str(e)}")
+            st.error(f"系統初始化失敗: {str(e)}")
             raise
 
     @staticmethod
@@ -65,31 +79,6 @@ class BaseballCoach:
     def load_data(self):
         """載入球隊資料"""
         try:
-            # 檢查本地檔案時間戳
-            if self.data_path.exists():
-                file_age = datetime.now() - datetime.fromtimestamp(self.data_path.stat().st_mtime)
-                if file_age < timedelta(hours=1):  # 如果資料小於1小時
-                    try:
-                        with open(self.data_path, 'r', encoding='utf-8') as f:
-                            self.data = json.load(f)
-                        # 重新設置 current_team_code 來確保成立年份正確
-                        for team_id in self.data.keys():
-                            self.scraper.current_team_code = team_id
-                            debug_file = Path(__file__).parent / "data" / f"{team_id.lower()}_debug.html"
-                            if debug_file.exists():
-                                with open(debug_file, encoding='utf-8') as f:
-                                    soup = BeautifulSoup(f, 'html.parser')
-                                    self.data[team_id]['team_info'] = self.scraper._parse_team_info(soup)
-                        st.success("已從本地檔案載入最新資料")
-                        return
-                    except json.JSONDecodeError:
-                        st.warning("本地檔案損壞，將重新抓取資料")
-                        self.data_path.unlink()
-            
-            # 從網站抓取資料
-            self.data = {}
-            progress_bar = st.progress(0)
-            
             # 定義球隊ID對應
             team_ids = {
                 'ACN': '中信兄弟',
@@ -99,7 +88,26 @@ class BaseballCoach:
                 'AAA': '味全龍',
                 'AKP': '台鋼雄鷹'
             }
-            
+
+            # 檢查本地檔案
+            if self.data_path.exists():
+                file_age = datetime.now() - datetime.fromtimestamp(self.data_path.stat().st_mtime)
+                if file_age < timedelta(hours=1):  # 如果資料小於1小時
+                    try:
+                        # 載入本地資料
+                        with open(self.data_path, 'r', encoding='utf-8') as f:
+                            self.data = json.load(f)
+                            st.success("已從本地檔案載入資料")
+                            return
+                    except json.JSONDecodeError:
+                        st.warning("本地檔案損壞，將重新抓取資料")
+                        self.data_path.unlink()
+
+            # 從網站抓取資料
+            self.data = {}
+            progress_bar = st.progress(0)
+
+            # 抓取每隊資料
             for idx, (team_id, team_name) in enumerate(team_ids.items()):
                 progress = idx / len(team_ids)
                 progress_bar.progress(progress)
@@ -115,21 +123,66 @@ class BaseballCoach:
                 except Exception as e:
                     st.error(f"❌ 載入 {team_name} 資料時發生錯誤: {str(e)}")
                     continue
-            
+
             progress_bar.progress(1.0)
-            
+
+            # 載入對戰紀錄
+            try:
+                with st.spinner("正在載入球隊對戰紀錄..."):
+                    head_to_head = self.scraper.fetch_head_to_head()
+                    if head_to_head:
+                        self.data['head_to_head'] = head_to_head
+            except Exception as e:
+                st.error("載入對戰紀錄失敗")
+                logger.error(f"載入對戰紀錄失敗: {str(e)}")
+
             # 儲存到本地文件
             if self.data:
-                self.data_path.parent.mkdir(parents=True, exist_ok=True)
-                with open(self.data_path, 'w', encoding='utf-8') as f:
-                    json.dump(self.data, f, ensure_ascii=False, indent=2)
-                st.success("✅ 已將資料儲存至本地文件")
+                try:
+                    self.data_path.parent.mkdir(parents=True, exist_ok=True)
+                    with open(self.data_path, 'w', encoding='utf-8') as f:
+                        json.dump(self.data, f, ensure_ascii=False, indent=2)
+                    st.success("✅ 已將資料儲存至本地文件")
+                except Exception as e:
+                    st.error(f"儲存資料失敗: {str(e)}")
             else:
                 st.error("❌ 無法載入任何球隊資料")
-                
+                    
         except Exception as e:
-            st.error(f"載入資料時發生錯誤: {str(e)}")
-            self.data = {}
+            logger.error(f"載入資料時發生錯誤: {str(e)}")
+            raise
+
+    def _update_live_data(self):
+        """更新即時資料（戰績、主客場、近期比賽等）"""
+        try:
+                # 更新戰績資料
+                standings = self.scraper.fetch_standings()
+                if standings:
+                    for team_id, stats in standings.items():
+                        if team_id in self.data:
+                            self.data[team_id]['record'] = stats
+
+                # 更新主客場戰績
+                venue_stats = self.scraper.fetch_venue_stats()
+                if venue_stats:
+                    for team_id, stats in venue_stats.items():
+                        if team_id in self.data:
+                            self.data[team_id]['venue_stats'] = stats
+
+                # 更新近期戰績
+                recent_games = self.scraper.fetch_recent_games()
+                if recent_games:
+                    for team_id, games in recent_games.items():
+                        if team_id in self.data:
+                            self.data[team_id]['trends'] = games
+
+                # 更新對戰紀錄
+                head_to_head = self.scraper.fetch_head_to_head()
+                if head_to_head:
+                    self.data['head_to_head'] = head_to_head
+
+        except Exception as e:
+                st.error(f"更新即時資料時發生錯誤: {str(e)}")
 
     def chat_interface(self):
         """聊天介面"""
