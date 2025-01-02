@@ -84,28 +84,61 @@ class CPBLScraper:
             response.raise_for_status()
             
             soup = BeautifulSoup(response.text, 'html.parser')
-            # 修正: 使用正確的 class 名稱
-            standings_table = soup.find('div', class_='RecordTable').find('table')
             standings = {}
             
+            # 防禦性查找
+            standings_table = None
+            tables = soup.find_all('table')
+            for table in tables:
+                if table.find('tr'):  # 找到含有行的表格
+                    standings_table = table
+                    break
+                    
             if standings_table:
-                # 修正: 改成找所有 tr，並跳過表頭
-                rows = standings_table.find_all('tr')[1:]
+                rows = standings_table.find_all('tr')[1:]  # 跳過表頭
                 for row in rows:
-                    cols = row.find_all('td')
-                    if len(cols) >= 5:
-                        # 修正: 從 sticky_wrap 中獲取球隊名稱
-                        team_name = cols[0].find('div', class_='sticky_wrap').find('div', class_='team-w-trophy').find('a').text.strip()
-                        team_id = self._get_team_id(team_name)
-                        if team_id:
-                            standings[team_id] = {
-                                'rank': int(cols[0].find('div', class_='rank').text.strip()),
-                                'wins': int(cols[2].text.split('-')[0]),
-                                'losses': int(cols[2].text.split('-')[2]),
-                                'ratio': cols[3].text.strip()
-                            }
+                    try:
+                        cols = row.find_all('td')
+                        if len(cols) >= 5:
+                            # 更靈活的隊名查找
+                            team_name = None
+                            team_div = row.find('div', class_=['team-w-trophy', 'team'])
+                            if team_div:
+                                team_name = team_div.get_text(strip=True)
+                                
+                            if team_name:
+                                team_id = self._get_team_id(team_name)
+                                if team_id:
+                                    # 提取數據，提供默認值
+                                    wins = 0
+                                    losses = 0
+                                    ratio = "0.000"
+                                    
+                                    # 嘗試解析勝負場次
+                                    record_text = cols[2].get_text(strip=True)
+                                    if '-' in record_text:
+                                        parts = record_text.split('-')
+                                        if len(parts) >= 3:
+                                            wins = int(parts[0])
+                                            losses = int(parts[2])
+                                            
+                                    # 嘗試解析勝率
+                                    ratio_text = cols[3].get_text(strip=True)
+                                    if ratio_text:
+                                        ratio = ratio_text
+                                        
+                                    standings[team_id] = {
+                                        'rank': int(cols[0].find('div', class_='rank').text.strip()) if cols[0].find('div', class_='rank') else 0,
+                                        'wins': wins,
+                                        'losses': losses,
+                                        'ratio': ratio
+                                    }
+                    except Exception as e:
+                        self.logger.error(f"處理球隊數據時發生錯誤: {str(e)}")
+                        continue
+                        
             return standings
-                
+                        
         except Exception as e:
             self.logger.error(f"抓取戰績資料失敗: {str(e)}")
             return {}

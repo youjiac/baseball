@@ -1,48 +1,52 @@
 import speech_recognition as sr
 from gtts import gTTS
+import io
+import tempfile
 import os
-import logging
-
-logger = logging.getLogger(__name__)
+import streamlit as st
 
 class SpeechProcessor:
     def __init__(self):
         """初始化語音處理器"""
         self.recognizer = sr.Recognizer()
-        self.language = 'zh-tw'  # 使用繁體中文
+        self.language = "zh-TW"  # 設置為繁體中文
         
-    def speech_to_text(self) -> str:
-        """語音轉文字"""
+    def listen(self) -> sr.AudioData:
+        """監聽麥克風輸入"""
         try:
             with sr.Microphone() as source:
-                logger.info("正在調整環境噪音...")
                 self.recognizer.adjust_for_ambient_noise(source)
-                logger.info("請說話...")
-                audio = self.recognizer.listen(source)
-                logger.info("正在識別...")
-                text = self.recognizer.recognize_google(audio, language=self.language)
-                logger.info(f"識別結果: {text}")
-                return text
+                audio = self.recognizer.listen(source, timeout=5)
+                return audio
         except Exception as e:
-            logger.error(f"語音識別錯誤: {str(e)}")
+            st.error(f"無法取得麥克風輸入: {str(e)}")
             return None
-
-    def text_to_speech(self, text: str) -> str:
-        """文字轉語音"""
+            
+    def transcribe(self, audio: sr.AudioData) -> str:
+        """將語音轉換為文字"""
         try:
+            text = self.recognizer.recognize_google(audio, language=self.language)
+            return text
+        except sr.UnknownValueError:
+            st.warning("無法識別語音內容")
+            return None
+        except sr.RequestError as e:
+            st.error(f"語音識別服務錯誤: {str(e)}")
+            return None
+            
+    def synthesize(self, text: str) -> bytes:
+        """將文字轉換為語音"""
+        try:
+            # 創建 gTTS 對象
             tts = gTTS(text=text, lang=self.language)
-            filename = "temp_speech.mp3"
-            tts.save(filename)
-            logger.info("語音生成成功")
-            return filename
+            
+            # 將語音保存到內存中
+            fp = io.BytesIO()
+            tts.write_to_fp(fp)
+            fp.seek(0)
+            
+            return fp.read()
+            
         except Exception as e:
-            logger.error(f"語音生成錯誤: {str(e)}")
+            st.error(f"語音合成失敗: {str(e)}")
             return None
-
-    def cleanup(self):
-        """清理暫存檔案"""
-        try:
-            if os.path.exists("temp_speech.mp3"):
-                os.remove("temp_speech.mp3")
-        except Exception as e:
-            logger.error(f"清理檔案時發生錯誤: {str(e)}")

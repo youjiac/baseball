@@ -1,80 +1,112 @@
 import streamlit as st
 import json
+import os
 from pathlib import Path
 import pandas as pd
-import sys
+import logging
 from datetime import datetime, timedelta
 import plotly.express as px
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import numpy as np
-from bs4 import BeautifulSoup
-import logging
 from models.baseball_llm import BaseballLLM, ModelNotReadyError, QueryProcessingError
 from models.calculator import BaseballCalculator
 from models.player_stats import PlayerStats
 from scrapers.cpbl_scraper import CPBLScraper
 from speech.speech_processor import SpeechProcessor
-import requests
-
 
 # 設置日誌記錄
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 class BaseballCoach:
-    def __init__(self):
-        """初始化教練助手"""
-        try:
-            self.data_path = Path(__file__).parent / "data" / "cpbl_teams.json"
-            self.calculator = BaseballCalculator()
-            self.player_stats = PlayerStats()
-            self.scraper = self._init_scraper()
-            self.llm_assistant = self._init_llm()
-            self.speech_processor = SpeechProcessor()
-            
-            try:
-                self.load_data()
-            except Exception as e:
-                st.error(f"載入資料時發生錯誤: {str(e)}")
-                self.data = {}  # 確保有一個空的資料結構
-                
-            # 即使資料載入失敗，也初始化 LLM
-            if hasattr(self, 'data'):
-                try:
-                    self.llm_assistant.initialize_knowledge(self.data)
-                except Exception as e:
-                    st.error(f"初始化知識庫時發生錯誤: {str(e)}")
-                    
-            logger.info("BaseballCoach 初始化成功")
-        except Exception as e:
-            logger.error(f"BaseballCoach 初始化失敗: {str(e)}")
-            st.error(f"系統初始化失敗: {str(e)}")
-            raise
-
     @staticmethod
-    @st.cache_resource
+    @st.cache_resource(show_spinner=False)
     def _init_scraper():
         """初始化並快取 scraper 實例"""
         try:
             scraper = CPBLScraper()
-            logger.info("Scraper 初始化成功")
+            logger.info("✅ Scraper 初始化成功")
             return scraper
         except Exception as e:
-            logger.error(f"Scraper 初始化失敗: {str(e)}")
-            raise
-        
+            logger.error(f"❌ Scraper 初始化失敗: {str(e)}")
+            return None
+
     @staticmethod
-    @st.cache_resource
+    @st.cache_resource(show_spinner=False)
     def _init_llm():
         """初始化並快取 LLM 實例"""
         try:
-            llm = BaseballLLM()
-            logger.info("LLM 初始化成功")
-            return llm
+            model_name = os.getenv("LLM_MODEL", "THUDM/chatglm3-6b")
+            llm = BaseballLLM(model_name=model_name)
+            if hasattr(llm, 'initialized') and llm.initialized:
+                logger.info("✅ LLM 初始化成功")
+                return llm
+            else:
+                logger.warning("⚠️ LLM 未完全初始化")
+                return None
         except Exception as e:
-            logger.warning(f"LLM 初始化失敗，切換到離線模式: {str(e)}")
-            return BaseballLLM()  # 返回一個未初始化的實例，將在離線模式運行
+            logger.error(f"❌ LLM 初始化失敗: {str(e)}")
+            return None
+
+    def __init__(self):
+        """初始化教練助手"""
+        # 先設置初始屬性為 None
+        self.scraper = None
+        self.llm = None
+        self.calculator = None
+        self.player_stats = None
+        self.speech_processor = None
+        self.data = {}
+        
+        try:
+            # 設定基本路徑
+            self.data_path = Path("data/baseball_data.json")
+            self.data_path.parent.mkdir(parents=True, exist_ok=True)
+            
+            # 1. 初始化 Scraper (必需的)
+            self.scraper = self._init_scraper()
+            if not self.scraper:
+                raise Exception("Scraper 初始化失敗")
+                
+            # 2. 載入資料 (必需的)
+            self.load_data()
+            if not self.data:
+                raise Exception("資料載入失敗")
+                
+            # 3. 初始化其他組件 (非必需的)
+            try:
+                self.calculator = BaseballCalculator()
+            except Exception as e:
+                logger.warning(f"BaseballCalculator 初始化失敗: {e}")
+                
+            try:
+                self.player_stats = PlayerStats()
+            except Exception as e:
+                logger.warning(f"PlayerStats 初始化失敗: {e}")
+            
+            # 4. 初始化 LLM (非必需的)
+            try:
+                self.llm = self._init_llm()
+                if self.llm and hasattr(self.llm, 'initialized') and self.llm.initialized:
+                    self.llm.initialize_knowledge(self.data)
+                else:
+                    logger.warning("LLM 未完全初始化")
+                    self.llm = None
+            except Exception as e:
+                logger.warning(f"LLM 初始化失敗: {e}")
+                self.llm = None
+                
+            # 5. 初始化語音處理器 (非必需的)
+            try:
+                self.speech_processor = SpeechProcessor()
+            except Exception as e:
+                logger.warning(f"語音處理器初始化失敗: {e}")
+                self.speech_processor = None
+                
+        except Exception as e:
+            logger.error(f"初始化失敗: {str(e)}")
+            st.error(f"初始化失敗: {str(e)}")
 
     def load_data(self):
         """載入球隊資料"""
@@ -145,9 +177,7 @@ class BaseballCoach:
                     st.success("✅ 已將資料儲存至本地文件")
                 except Exception as e:
                     st.error(f"儲存資料失敗: {str(e)}")
-            else:
-                st.error("❌ 無法載入任何球隊資料")
-                    
+                
         except Exception as e:
             logger.error(f"載入資料時發生錯誤: {str(e)}")
             raise
@@ -186,99 +216,113 @@ class BaseballCoach:
 
     def chat_interface(self):
         """聊天介面"""
-        st.title("⚾ CPBL 教練助手")
+        st.title("CPBL 教練助手")
         
+        # 檢查 LLM 是否可用
+        if not self.llm:
+            st.warning("⚠️ 語言模型未啟用，僅顯示基本資料")
+            return
+        
+        # 初始化會話歷史
         if "messages" not in st.session_state:
             st.session_state.messages = []
-            # 添加歡迎訊息
-            st.session_state.messages.append({
-                "role": "assistant",
-                "content": "歡迎使用CPBL教練助手！我可以幫您查詢球隊資訊、分析數據，以及回答棒球相關問題。請問有什麼我可以幫您的嗎？"
-            })
 
-        # 語音輸入按鈕
-        col1, col2 = st.columns([3, 1])
-        with col2:
-            if st.button("🎤 語音輸入", key="voice_input"):
-                with st.spinner("正在聆聽..."):
-                    try:
-                        text = self.speech_processor.speech_to_text()
-                        if text:
-                            st.success(f"識別到: {text}") 
-                            st.session_state.messages.append({"role": "user", "content": text})
-                            st.rerun()
-                    except Exception as e:
-                        st.error(f"語音輸入失敗: {str(e)}")
-
-        # 文字輸入
-        with col1:
-            if prompt := st.chat_input("請輸入您的問題或使用語音輸入"):
-                st.session_state.messages.append({"role": "user", "content": prompt})
-
-        # 顯示對話歷史
-        for i, message in enumerate(st.session_state.messages):
+        # 顯示歷史消息
+        for message in st.session_state.messages:
             with st.chat_message(message["role"]):
                 st.markdown(message["content"])
-                
-                # 為助手回應添加語音播放選項
-                if message["role"] == "assistant":
-                    if st.button("🔊", key=f"play_{i}"):
-                        audio_file = self.speech_processor.text_to_speech(message["content"])
-                        if audio_file:
-                            st.audio(audio_file)
-                            # 清理暫存檔案
-                            self.speech_processor.cleanup()
 
-        # 處理最新的用戶輸入
-        if st.session_state.messages and st.session_state.messages[-1]["role"] == "user":
-            prompt = st.session_state.messages[-1]["content"]
+        # 語音輸入按鈕
+        if st.button("🎤 語音輸入"):
+            if not self.speech_processor:
+                st.error("語音功能未啟用")
+                return
+                
+            try:
+                with st.spinner("正在聆聽..."):
+                    audio_input = self.speech_processor.listen()
+                    if audio_input:
+                        question = self.speech_processor.transcribe(audio_input)
+                        if question:
+                            st.session_state.messages.append({"role": "user", "content": question})
+                            self._process_question(question)
+            except Exception as e:
+                st.error(f"語音輸入失敗: {str(e)}")
+
+        # 文字輸入
+        if prompt := st.chat_input("請輸入您的問題..."):
+            st.session_state.messages.append({"role": "user", "content": prompt})
+            self._process_question(prompt)
+
+    def _process_question(self, question: str):
+        """處理用戶問題並生成回應"""
+        try:
             with st.chat_message("assistant"):
-                with st.spinner("教練正在思考中..."):
-                    try:
-                        response = self.llm_assistant.query(prompt)
+                with st.spinner("思考中..."):
+                    if self.llm:
+                        response = self.llm.query(question)
                         st.markdown(response)
-                        st.session_state.messages.append({
-                            "role": "assistant",
-                            "content": response
-                        })
-                    except ModelNotReadyError:
-                        error_message = "系統尚未準備就緒，請稍後再試。"
-                        st.error(error_message)
-                        st.session_state.messages.append({
-                            "role": "assistant",
-                            "content": error_message
-                        })
-                    except QueryProcessingError as e:
-                        error_message = f"處理查詢時發生錯誤: {str(e)}"
-                        st.error(error_message)
-                        st.session_state.messages.append({
-                            "role": "assistant",
-                            "content": error_message
-                        })
-                    except Exception as e:
-                        error_message = "非常抱歉，系統遇到了意外問題。請稍後再試。"
-                        logger.error(f"未預期的錯誤: {str(e)}", exc_info=True)
-                        st.error(error_message)
-                        st.session_state.messages.append({
-                            "role": "assistant",
-                            "content": error_message
-                        })
+                        st.session_state.messages.append({"role": "assistant", "content": response})
+                        
+                        # 如果配置了語音輸出
+                        if st.session_state.get("enable_voice", False) and self.speech_processor:
+                            audio = self.speech_processor.synthesize(response)
+                            if audio:
+                                st.audio(audio, format="audio/wav")
+                    else:
+                        st.warning("LLM 未正確初始化，無法處理問題")
+        except Exception as e:
+            st.error(f"處理問題時發生錯誤: {str(e)}")
 
     def main_page(self):
         """主頁面"""
-        try:
-            st.title("CPBL 教練助手")
+        st.title("CPBL 教練助手")
+        
+        # 側邊欄設置
+        with st.sidebar:
+            st.title("功能設置")
             
-            # 側邊欄選單
-            with st.sidebar:
-                st.title("功能選單")
-                page = st.selectbox(
-                    "選擇功能",
-                    ["智能助手", "球隊分析", "球員查詢", "數據統計"]
-                )
-                st.write(f"選擇的功能：{page}")
+            # 選擇LLM模型
+            model_options = {
+                "THUDM/chatglm3-6b": "ChatGLM3-6B",
+                "Qwen/Qwen-7B-Chat": "Qwen-7B",
+                "FlagAlpha/Llama2-Chinese-13b-Chat": "LLAMA2-Chinese-13B"
+            }
+            
+            # 檢查環境變量中是否已有模型設置
+            current_model = os.getenv("LLM_MODEL", "THUDM/chatglm3-6b")
+            
+            selected_model = st.selectbox(
+                "選擇語言模型",
+                options=list(model_options.keys()),
+                format_func=lambda x: model_options[x],
+                index=list(model_options.keys()).index(current_model)
+            )
+            
+            # 如果模型改變，重新初始化
+            if current_model != selected_model:
+                os.environ["LLM_MODEL"] = selected_model
+                with st.spinner("正在切換模型..."):
+                    self.llm = self._init_llm()
+                    if self.llm and hasattr(self.llm, 'initialize_knowledge'):
+                        self.llm.initialize_knowledge(self.data)
+            
+            # 語音設置
+            st.session_state.enable_voice = st.toggle("啟用語音輸出", value=False)
+            
+            # 功能選單
+            page = st.selectbox(
+                "選擇功能",
+                ["智能助手", "球隊分析", "球員查詢", "數據統計"]
+            )
+            
+            # 更新資料按鈕
+            if st.button("更新資料"):
+                with st.spinner("正在更新資料..."):
+                    self.load_data()
 
-            # 根據選擇顯示不同頁面
+        # 根據選擇顯示不同頁面
+        try:
             if page == "智能助手":
                 self.chat_interface()
             elif page == "球隊分析":
@@ -287,10 +331,9 @@ class BaseballCoach:
                 self.player_search()
             elif page == "數據統計":
                 self.statistics()
-                
         except Exception as e:
-            logger.error(f"頁面載入錯誤：{str(e)}")
-            st.error(f"頁面載入錯誤：{str(e)}")
+            logger.error(f"頁面載入錯誤: {str(e)}")
+            st.error(f"頁面載入錯誤: {str(e)}")
 
     def team_analysis(self):
         """球隊分析頁面"""
@@ -740,16 +783,36 @@ def main():
         # 設定頁面配置
         st.set_page_config(
             page_title="CPBL 教練助手",
-            layout="wide"
+            page_icon="⚾",
+            layout="wide",
+            initial_sidebar_state="expanded"
         )
 
-        # 初始化並運行應用
+        # 設定版面樣式
+        st.markdown("""
+        <style>
+        .main {
+            max-width: 1200px;
+            padding: 2rem;
+        }
+        .stButton>button {
+            width: 100%;
+        }
+        </style>
+        """, unsafe_allow_html=True)
+
+        # 嘗試初始化應用
         app = BaseballCoach()
         app.main_page()
         
     except Exception as e:
         logger.error(f"程式執行錯誤：{str(e)}")
-        st.error("程式執行發生錯誤，請稍後再試或聯繫管理員。")
+        st.error("""
+        程式執行發生錯誤，請檢查：
+        1. 確保所有必要的套件已正確安裝
+        2. 確保網路連接正常
+        3. 若問題持續，請聯繫管理員
+        """)
 
 if __name__ == "__main__":
     main()
