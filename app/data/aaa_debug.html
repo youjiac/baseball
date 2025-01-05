@@ -1,0 +1,1043 @@
+
+
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-Hant">
+<head>
+    <!-- Google Tag Manager -->
+    <script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-56Z9JC');</script>
+    <!-- End Google Tag Manager -->
+
+
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta charset="UTF-8" />
+    <meta name="description" content="中華職業棒球大聯盟（CPBL），簡稱中華職棒、中職，是臺灣目前唯一的職業棒球聯盟，也是臺灣最早成立的職業運動聯盟。" />
+    <meta property="og:title" content="中華職棒大聯盟全球資訊網 The Official Site of CPBL" />
+    <meta property="og:description" content="中華職業棒球大聯盟（CPBL），簡稱中華職棒、中職，是臺灣目前唯一的職業棒球聯盟，也是臺灣最早成立的職業運動聯盟。" />
+    <meta property="og:image" content="https://www.cpbl.com.tw/theme/common/images/project/logo_new.png" />
+
+    
+    <title>球員列表 | 中華職棒大聯盟全球資訊網 The Official Site of CPBL</title>
+
+    <link rel="shortcut icon" href="/theme/client/images/favicon.ico" />
+
+    <link href="/theme/client/css/style.css?v=20220331" rel="stylesheet" type="text/css" />
+    
+
+<link href="/theme/client/css/content.css?v=20220505" rel="stylesheet" type="text/css" />
+
+
+<link href="/bundles/css?v=nzlhs8MdHZvr4Vdkx1gtXwY2K0Px_QlNX-C-c3KOB8U1" rel="stylesheet"/>
+
+<script src="/bundles/js?v=wZRs1M0c0S0f5304K3gRrznT3xN_SSDBx1POwY8Ljtg1"></script>
+
+
+<script type="text/javascript">
+    var pgInfo = {
+        SystemPhase: 11,
+        Form: null,
+        WebSiteRoot: "/",
+        UploadRoot: "/files/"
+    };
+
+    $(function () {
+        pgInfo.Form = $("form[id='MainForm']");
+    });
+</script>
+
+
+<script type="text/javascript">
+    var captchaHelper = (function () {
+        return {
+            reset: function () {
+                $('.captcha-code').attr('src', '/pageutil/captchacode' + "?" + Math.floor(Math.random() * (1000 - 1 + 1) + 1));
+                return false;
+            }
+        };
+    })();
+
+    $(function () {
+        //captchaHelper.reset();
+    });
+</script>
+
+
+    <script type="text/javascript">
+        $(function () {
+            $('.superfish').superfish();
+            $('#MenuMobile').mmenu();
+        });
+        Date.prototype.addDays = function (days) {
+            this.setDate(this.getDate() + days);
+            return this;
+        }
+        Date.prototype.format = function (fmt) {
+            var o = {
+                "M+": this.getMonth() + 1, //月份
+                "d+": this.getDate(), //日
+                "h+": this.getHours(), //小時
+                "m+": this.getMinutes(), //分
+                "s+": this.getSeconds(), //秒
+                "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+                "S": this.getMilliseconds() //毫秒
+            };
+            if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+            for (var k in o)
+                if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+            return fmt;
+        }
+    </script>
+
+    <link href="/theme/client/css/width_narrow.css" media="only screen and (max-width: 639px)" rel="stylesheet" type="text/css" />
+    <link href="/theme/client/css/width_wide.css" media="only screen and (min-width: 640px) and (max-width: 1023px)" rel="stylesheet" type="text/css" />
+    <link href="/theme/client/css/width_desktop.css" media="only screen and (min-width: 1024px)" rel="stylesheet" type="text/css" />
+    
+        <script src="/theme/client/js/vue.min.js"></script>
+
+    
+    <script src="/theme/client/js/jquery.colorbox.js"></script>
+
+    <script src="/theme/client/js/jquery.nav.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            // 球員列表浮動標籤
+            $('.TeamPlayersListWrap .cat_ancher > ul').onePageNav({
+                changeHash: false,
+                currentClass: 'actived'
+            });
+
+            $('.TeamPlayersListWrap .cat_ancher a').click(function () {
+                var $li = $(this).parent('li');
+                $li.addClass('actived').siblings().removeClass('actived');
+            })
+
+            $(window).bind('scroll resize', function () {
+                var scrollVal = $(this).scrollTop(),
+                    //winHeight = $(window).height(),
+                    menuHeight = $('#Menu').height(),
+                    TeamPlayersList = $('.TeamPlayersListWrap'),
+                    playerCat = $('.TeamPlayersListWrap .cat_ancher'),
+                    playerCatHeight = playerCat.height(),
+                    footer = $('#Footer'),
+                    scrollStart = (TeamPlayersList.offset().top) - menuHeight,
+                    scrollEnd = (footer.offset().top) - 140 - (menuHeight + playerCatHeight);
+                //scrollEnd = (footer.offset().top) - winHeight - 140 + (winHeight - (menuHeight + playerCatHeight));
+
+                if (scrollVal > scrollStart) {
+                    if (scrollVal < scrollEnd) {
+                        playerCat.addClass('fixedTop').removeClass('fixedBottom');
+                    }
+                    else {
+                        playerCat.addClass('fixedBottom').removeClass('fixedTop');
+                    }
+                }
+                else {
+                    playerCat.removeClass('fixedTop fixedBottom');
+                }
+            }).scroll();	// 觸發一次 scroll()
+
+            $("#KindCode").change(function (e) {
+                
+                e.preventDefault()
+
+                $("body").block({ message: '<img alt="" border="0" src="/theme/common/images/loader.gif" />', css: { width: "32px", height: "32px", border: "0px" }, overlayCSS: { backgroundColor: "#fff" } });
+
+                $.ajax({
+                    url: "/team",
+                    type: "post",
+                    async: true,
+                    data: pgInfo.Form.serialize(),
+                    success: function (result) {
+                        $("body").unblock();
+                        $("#PageListContainer").html("")
+                        $("#PageListContainer").html(result)
+                    },
+                    error: function (xhr) {
+                        
+                        console.log(xhr)
+                    },
+                    complete: function () {
+                        $("body").unblock()
+                    }
+                });
+            })
+        });
+    </script>
+
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-56Z9JC"
+                height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <div id="Wrap">
+        <header id="Header">
+            <div>
+                    <div class="Topper">
+                        <div>
+                            <div class="top_links">
+                                <ul class="list superfish">
+                                        <li class="member"><a href="https://www.cpbl.com.tw/login">登入丨註冊</a></li>
+                                    
+                                    <li class="lang"><a href="https://en.cpbl.com.tw">English</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                <div class="col_left">
+                    <div class="logo">
+                        <h1><a href="/" title="中華職棒大聯盟全球資訊網 The Official Site of CPBL" style="background-image:url('/theme/common/images/project/logo_new.png');height:110%;">中華職棒大聯盟全球資訊網 The Official Site of CPBL</a></h1>
+                    </div>
+
+                    <!-- 桌機版選單 -->
+                    <nav id="Menu">
+                        <div>
+                            <ul class="menu_list superfish">
+                                <li class="home"><a href="/" title="中華職棒大聯盟全球資訊網 The Official Site of CPBL" style="background-image:url('/theme/common/images/project/logo_new.png')">中華職棒大聯盟全球資訊網 The Official Site of CPBL</a></li>
+                                <li>
+                                    <a href="javascript:;">最新消息</a>
+                                    <ul>
+                                        <li><a href="/xmdoc">賽事新聞</a></li>
+                                        <li><a href="/news">新聞公告</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="/schedule">賽程</a></li>
+                                <li><a href="/box">成績看板</a></li>
+                                <li>
+                                    <a href="javascript:;">球隊戰績</a>
+                                    <ul>
+                                        <li><a href="/standings/season">本季球隊戰績</a></li>
+                                        <li><a href="/standings/special">特殊統計</a></li>
+                                        <li><a href="/standings/history">歷年球隊戰績</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">數據統計</a>
+                                    <ul>
+                                        <li><a href="/stats/toplist">單項排行榜</a></li>
+                                        <li><a href="/stats/recordall">全記錄查詢</a></li>
+                                        <li><a href="/stats/yearaward">年度獎項得主</a></li>
+                                        <li><a href="/stats/hr">歷年全壘打明細</a></li>
+                                        <li><a href="/stats/mvp">單月MVP</a></li>
+                                        <li><a href="/specialreport/cont?SId=0L090754347267822514">紀錄特別報導</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">球員</a>
+                                    <ul>
+                                        <li><a href="/player">球員點將錄</a></li>
+                                        <li><a href="/player/trans">球員異動</a></li>
+                                    </ul>
+                                </li>
+
+                                <li>
+                                    <a href="https://www.cpbl.com.tw/eshop">商城</a>
+                                </li>
+
+                                <li>
+                                    <a href="https://awb.cpbl.com.tw">冬盟</a>
+                                </li>
+
+                                <!--li><a href="javascript:;">票務</a></li-->
+                                
+                            </ul>
+                        </div>
+                    </nav>
+                    <!-- 桌機版選單 end -->
+                </div>
+
+                <div class="col_right">
+                    <div class="teams">
+                        <ul>
+                                <li><a href="/team?ClubNo=ACN" title="中信兄弟" style="background-image:url('/files/file_pool/1/0l109765754453009797/logo_brothers.png')">中信兄弟</a></li>
+                                <li><a href="/team?ClubNo=ADD" title="統一7-ELEVEn獅" style="background-image:url('/files/file_pool/1/0l109765753819131779/logo_lions.png')">統一7-ELEVEn獅</a></li>
+                                <li><a href="/team?ClubNo=AJL" title="樂天桃猿" style="background-image:url('/files/file_pool/1/0o012549940550727932/2024_cpbl%e5%85%ad%e9%9a%8alogo_r2_%e5%ae%98%e7%b6%b2.png')">樂天桃猿</a></li>
+                                <li><a href="/team?ClubNo=AEO" title="富邦悍將" style="background-image:url('/files/file_pool/1/0l109765753631383724/logo_fubon.png')">富邦悍將</a></li>
+                                <li><a href="/team?ClubNo=AAA" title="味全龍" style="background-image:url('/files/file_pool/1/0l109765752096404797/logo_dragon.png')">味全龍</a></li>
+                                <li><a href="/team?ClubNo=AKP" title="台鋼雄鷹" style="background-image:url('https://www.cpbl.com.tw/files/file_pool/1/0n062433781050140053/%e5%96%ae%e8%89%b2t-100x100.png')">台鋼雄鷹</a></li>
+                        </ul>
+                    </div>
+                    
+                    
+                    <div class="cpbltv"><a href="https://hamivideo.hinet.net/main/606.do" target="_blank" title="CPBLTV(開啟新視窗)">CPBLTV</a></div>
+                </div>
+            </div>
+        </header>
+
+        
+
+
+    <div id="Center">
+<form action="/team?clubno=AAA" id="MainForm" method="post"><input name="__RequestVerificationToken" type="hidden" value="vL6kKsJ90ZCMo3JdRqpGiGxe3GgMGN72vsPbg5rprcjZpzaW7waWV_f1lGywjp5Yle32IO12Hslt_iAu8ekryUdXZpI1" /><input id="ClubNo" name="ClubNo" type="hidden" value="AAA" />            <div id="Content">
+
+                <div class="PageTitle"><h2><!-- InstanceBeginEditable name="PageTitle" -->味全龍<span class="en">DRAGONS</span><!-- InstanceEndEditable --></h2></div>
+                <div id="Breadcrumbs">
+                    <div>
+                        <ul>
+                            <li><a href="/">首頁</a></li>
+                            <!-- InstanceBeginEditable name="Breadcrumbs" -->
+                            <li><a href="/team?ClubNo=AAA">味全龍</a></li>
+                            <li><a href="#">球員列表</a></li>
+                            <!-- InstanceEndEditable -->
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- InstanceBeginEditable name="content" -->
+                <div class="ContHeader">
+                    <!--球隊選單-->
+                    <div class="ContNav TeamNav">
+                        <div class="team_name"><span style="background-image:url(/files/atts/0L021497849799849722/logo_dragon_large.png)">味全龍</span></div>
+                        <div class="nav_trigger">球員列表</div>
+
+
+<div class="nav_list">
+    <ul>
+            <li><a href="/team?ClubNo=AAA">球員列表</a></li>
+        <li><a href="/team/dailyrecord?ClubNo=AAA">逐日戰績</a></li>
+            <li><a href="/team/schedule?ClubNo=AAA">賽程</a></li>
+        <li><a href="/team/teamrecord?ClubNo=AAA">球隊戰績</a></li>
+        <li><a href="/team/teamscore?ClubNo=AAA">團隊成績</a></li>
+            <li><a href="/team/trans?ClubNo=AAA">球員異動</a></li>
+    </ul>
+</div>
+
+<script>
+    $(function () {
+        var str = '球員列表';
+        $('.nav_list ul li a').each(function() {
+            if (str.indexOf($(this).text()) != -1) {
+                $(this).parent().attr("class","actived");
+            }
+        });
+    });
+</script>
+                    </div>
+                    <!--球隊選單 end-->
+
+                    <div class="TeamBrief">
+                        <div>
+                            <dl>
+                                <dt>
+                                    <div class="name">味全龍</div>
+                                    <div class="desc">味全龍(1990-1999, 2019 - 至今)</div>
+                                </dt>
+                                <dd>
+                                    <div class="label">領隊</div>
+                                    <div class="desc">丁仲緯</div>
+                                </dd>
+                                <dd>
+                                    <div class="label">總教練</div>
+                                    <div class="desc">葉君璋</div>
+                                </dd>
+                                <dd>
+                                    <div class="label">主球場</div>
+                                    <div class="desc">天母棒球場</div>
+                                </dd>
+                                <dd>
+                                    <div class="label">球團網站</div>
+                                    <div class="desc"><a href="https://www.wdragons.com/CWS" target="_blank" title="(開啟新視窗)">https://www.wdragons.com/CWS</a></div>
+                                </dd>
+                                <dd>
+                                    <div class="label">聯絡地址</div>
+                                    <div class="desc">台北市士林區忠誠路二段77號</div>
+                                </dd>
+                                <dd>
+                                    <div class="label">聯絡電話</div>
+                                    <div class="desc">(02)7755-1999</div>
+                                </dd>
+                                <dd>
+                                    <div class="label">傳真</div>
+                                    <div class="desc"></div>
+                                </dd>
+                                <dd>
+                                    <div class="label">聯絡信箱</div>
+                                    <div class="desc"><a href="mailto:service@wdragons.com">service@wdragons.com</a></div>
+                                </dd>
+                            </dl>
+                            
+                                <div class="follow">
+                                    <div class="following"><span class="dev-total-followers">0</span>人關注中</div>
+                                </div>
+                        </div>
+                    </div>
+                    <a name="ch_bottom"></a>
+                </div>
+                <!--ContHeader end-->
+
+
+                <div class="DistTitle">
+                    <h3>球員列表<span class="en"></span></h3>
+                    <div class="search FormElmt">
+                        <div class="item">
+                            <select id="KindCode" name="KindCode"><option selected="selected" value="A">一軍</option>
+<option value="D">二軍</option>
+</select>
+                        </div>
+                    </div>
+                </div>
+
+                <!--球員列表-->
+                <div class="TeamPlayersListWrap">
+                    <div class="cat_ancher">
+                        <ul>
+                            <li class="actived"><a href="#coach">教練</a></li>
+                            <li><a href="#pitcher">投手</a></li>
+                            <li><a href="#catcher">捕手</a></li>
+                            <li><a href="#infielder">內野手</a></li>
+                            <li><a href="#outfielder">外野手</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="PageListContainer">
+
+
+<!--教練列表沒有連結，球員列表才有-->
+<div class="cat_title"><a name="coach" id="coach"></a>教練</div>
+<div class="TeamPlayersList">
+        <div class="item">
+            <div>
+                <div class="img"><span style="background-image:url('/files/atts/0L087781937924784275/27葉君璋2024.jpg')"></span></div>
+                <div class="cont">
+                    <div class="pos">一軍總教練</div>
+                    <div class="name">葉君璋</div>
+                    <div class="number">27</div>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <div>
+                <div class="img"><span style="background-image:url('/files/atts/0L087781909434696180/86陳志偉2024.jpg')"></span></div>
+                <div class="cont">
+                    <div class="pos">一軍內野教練</div>
+                    <div class="name">陳志偉</div>
+                    <div class="number">86</div>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <div>
+                <div class="img"><span style="background-image:url('/files/atts/0L087781914971514151/92黃亦志2024.jpg')"></span></div>
+                <div class="cont">
+                    <div class="pos">一軍牛棚教練</div>
+                    <div class="name">黃亦志</div>
+                    <div class="number">92</div>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <div>
+                <div class="img"><span style="background-image:url('/files/atts/0O253528697631712308/S__7012358_0.jpg')"></span></div>
+                <div class="cont">
+                    <div class="pos">一軍打擊教練</div>
+                    <div class="name">克魯茲</div>
+                    <div class="number">14</div>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <div>
+                <div class="img"><span style="background-image:url('/files/atts/0L087781938103532229/49張泰山2024.jpg')"></span></div>
+                <div class="cont">
+                    <div class="pos">一軍打擊教練</div>
+                    <div class="name">張泰山</div>
+                    <div class="number">49</div>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <div>
+                <div class="img"><span style="background-image:url('/files/atts/0L087781907532121153/66張建銘2024.jpg')"></span></div>
+                <div class="cont">
+                    <div class="pos">一軍打擊教練</div>
+                    <div class="name">張建銘</div>
+                    <div class="number">66</div>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <div>
+                <div class="img"><span style="background-image:url('/files/atts/0L087781879042032968/91郭勝安2024.jpg')"></span></div>
+                <div class="cont">
+                    <div class="pos">一軍投手教練</div>
+                    <div class="name">郭勝安</div>
+                    <div class="number">91</div>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <div>
+                <div class="img"><span style="background-image:url('/files/atts/0L087782107833605129/54林瑋恩2024.jpg')"></span></div>
+                <div class="cont">
+                    <div class="pos">一軍首席教練</div>
+                    <div class="name">林瑋恩</div>
+                    <div class="number">54</div>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <div>
+                <div class="img"><span style="background-image:url('/files/atts/0L088847168039820286/70高須洋介2024.jpg')"></span></div>
+                <div class="cont">
+                    <div class="pos">一軍首席教練</div>
+                    <div class="name">高須洋介</div>
+                    <div class="number">70</div>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <div>
+                <div class="img"><span style="background-image:url('/files/atts/0M101612473411159880/32王膺鵬2024-1.jpg')"></span></div>
+                <div class="cont">
+                    <div class="pos">一軍捕手教練</div>
+                    <div class="name">王膺鵬</div>
+                    <div class="number">32</div>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <div>
+                <div class="img"><span style="background-image:url('/files/atts/0L087781917341534648/95高孝儀.JPG')"></span></div>
+                <div class="cont">
+                    <div class="pos">一軍跑壘教練</div>
+                    <div class="name">高孝儀</div>
+                    <div class="number">95</div>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <div>
+                <div class="img"><span style="background-image:url('/files/atts/0L088846957216103214/97邱世杰2024.jpg')"></span></div>
+                <div class="cont">
+                    <div class="pos">一軍體能教練</div>
+                    <div class="name">邱世杰</div>
+                    <div class="number">97</div>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <div>
+                <div class="img"><span style="background-image:url('/files/atts/0L087781885767709094/76劉榮華2024.jpg')"></span></div>
+                <div class="cont">
+                    <div class="pos">守備教練</div>
+                    <div class="name">劉榮華</div>
+                    <div class="number">76</div>
+                </div>
+            </div>
+        </div>
+</div>
+
+<div class="cat_title"><a name="pitcher" id="pitcher"></a>投手</div>
+<div class="TeamPlayersList">
+        <div class="item">
+            <div>
+                <div class="img"><a href="/team/person?Acnt=0000006160" style="background-image:url('/files/atts/0N062555412386889507/0李超2024.jpg')" title="李超"><span>李超</span></a></div>
+                <div class="cont">
+                    <div class="pos">投手</div>
+                    <div class="name"><a href="/team/person?Acnt=0000006160">李超</a></div>
+                    <div class="number">0</div>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <div>
+                <div class="img"><a href="/team/person?Acnt=0000000135" style="background-image:url('/files/atts/0L087781874779548454/5陳禹勳2024.jpg')" title="陳禹勳"><span>陳禹勳</span></a></div>
+                <div class="cont">
+                    <div class="pos">投手</div>
+                    <div class="name"><a href="/team/person?Acnt=0000000135">陳禹勳</a></div>
+                    <div class="number">5</div>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <div>
+                <div class="img"><a href="/team/person?Acnt=0000002280" style="background-image:url('/files/atts/0L087782035539177708/11廖任磊2024.jpg')" title="廖任磊"><span>廖任磊</span></a></div>
+                <div class="cont">
+                    <div class="pos">投手</div>
+                    <div class="name"><a href="/team/person?Acnt=0000002280">廖任磊</a></div>
+                    <div class="number">11</div>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <div>
+                <div class="img"><a href="/team/person?Acnt=0000001524" style="background-image:url('/files/atts/0L087782020192259737/15劉昱言2024.jpg')" title="劉昱言"><span>劉昱言</span></a></div>
+                <div class="cont">
+                    <div class="pos">投手</div>
+                    <div class="name"><a href="/team/person?Acnt=0000001524">劉昱言</a></div>
+                    <div class="number">15</div>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <div>
+                <div class="img"><a href="/team/person?Acnt=0000006497" style="background-image:url('/files/atts/0L088850493829401912/鋼龍2024-1.jpg')" title="鋼龍"><span>鋼龍</span></a></div>
+                <div class="cont">
+                    <div class="pos">投手</div>
+                    <div class="name"><a href="/team/person?Acnt=0000006497">鋼龍</a></div>
+                    <div class="number">37</div>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <div>
+                <div class="img"><a href="/team/person?Acnt=0000005372" style="background-image:url('/files/atts/0L088845926507890639/40呂詠臻2024.jpg')" title="呂詠臻"><span>呂詠臻</span></a></div>
+                <div class="cont">
+                    <div class="pos">投手</div>
+                    <div class="name"><a href="/team/person?Acnt=0000005372">呂詠臻</a></div>
+                    <div class="number">40</div>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <div>
+                <div class="img"><a href="/team/person?Acnt=0000006215" style="background-image:url('/files/atts/0L088849370360363338/42趙璟榮2024.jpg')" title="趙璟榮"><span>趙璟榮</span></a></div>
+                <div class="cont">
+                    <div class="pos">投手</div>
+                    <div class="name"><a href="/team/person?Acnt=0000006215">趙璟榮</a></div>
+                    <div class="number">42</div>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <div>
+                <div class="img"><a href="/team/person?Acnt=0000001404" style="background-image:url('/files/atts/0L087782027191684710/68羅華韋2024.jpg')" title="羅華韋"><span>羅華韋</span></a></div>
+                <div class="cont">
+                    <div class="pos">投手</div>
+                    <div class="name"><a href="/team/person?Acnt=0000001404">羅華韋</a></div>
+                    <div class="number">68</div>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <div>
+                <div class="img"><a href="/team/person?Acnt=0000001821" style="background-image:url('/files/atts/0L087782027366118278/71林子昱2024.jpg')" title="林子昱"><span>林子昱</span></a></div>
+                <div class="cont">
+                    <div class="pos">投手</div>
+                    <div class="name"><a href="/team/person?Acnt=0000001821">林子昱</a></div>
+                    <div class="number">71</div>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <div>
+                <div class="img"><a href="/team/person?Acnt=0000000364" style="background-image:url('/files/atts/0L087781910066736647/87劉家愷2024.jpg')" title="劉家愷"><span>劉家愷</span></a></div>
+                <div class="cont">
+                    <div class="pos">投手</div>
+                    <div class="name"><a href="/team/person?Acnt=0000000364">劉家愷</a></div>
+                    <div class="number">87</div>
+                </div>
+            </div>
+        </div>
+</div>
+
+<!--教練列表沒有連結，球員列表才有-->
+<div class="cat_title"><a name="catcher" id="catcher"></a>捕手</div>
+<div class="TeamPlayersList">
+        <div class="item">
+            <div>
+                <div class="img"><a href="/team/person?Acnt=0000003625" style="background-image:url('/files/atts/0L087782153170013481/4吉力吉撈鞏冠2024.jpg')" title="吉力吉撈．鞏冠"><span>吉力吉撈．鞏冠</span></a></div>
+                <div class="cont">
+                    <div class="pos">捕手</div>
+                    <div class="name"><a href="/team/person?Acnt=0000003625">吉力吉撈．鞏冠</a></div>
+                    <div class="number">4</div>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <div>
+                <div class="img"><a href="/team/person?Acnt=0000006217" style="background-image:url('/files/atts/0L088846484770759160/9林辰勳2024.jpg')" title="林辰勳"><span>林辰勳</span></a></div>
+                <div class="cont">
+                    <div class="pos">捕手</div>
+                    <div class="name"><a href="/team/person?Acnt=0000006217">林辰勳</a></div>
+                    <div class="number">9</div>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <div>
+                <div class="img"><a href="/team/person?Acnt=0000001258" style="background-image:url('/files/atts/0L087782019204098208/60劉時豪2024.jpg')" title="劉時豪"><span>劉時豪</span></a></div>
+                <div class="cont">
+                    <div class="pos">捕手</div>
+                    <div class="name"><a href="/team/person?Acnt=0000001258">劉時豪</a></div>
+                    <div class="number">60</div>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <div>
+                <div class="img"><a href="/team/person?Acnt=0000005291" style="background-image:url('/files/atts/0L088850198468306680/63蔣少宏2024.jpg')" title="蔣少宏"><span>蔣少宏</span></a></div>
+                <div class="cont">
+                    <div class="pos">捕手</div>
+                    <div class="name"><a href="/team/person?Acnt=0000005291">蔣少宏</a></div>
+                    <div class="number">63</div>
+                </div>
+            </div>
+        </div>
+</div>
+
+<div class="cat_title"><a name="infielder" id="infielder"></a>內野手</div>
+<div class="TeamPlayersList">
+        <div class="item">
+            <div>
+                <div class="img"><a href="/team/person?Acnt=0000005536" style="background-image:url('/files/atts/0L088849822805717382/3瑪仕革斯俄霸律尼2024.jpg')" title="瑪仕革斯．俄霸律尼"><span>瑪仕革斯．俄霸律尼</span></a></div>
+                <div class="cont">
+                    <div class="pos">一壘手</div>
+                    <div class="name"><a href="/team/person?Acnt=0000005536">瑪仕革斯．俄霸律尼</a></div>
+                    <div class="number">3</div>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <div>
+                <div class="img"><a href="/team/person?Acnt=0000005538" style="background-image:url('/files/atts/0L088848967368898201/10黃柏豪2024.jpg')" title="黃柏豪"><span>黃柏豪</span></a></div>
+                <div class="cont">
+                    <div class="pos">一壘手</div>
+                    <div class="name"><a href="/team/person?Acnt=0000005538">黃柏豪</a></div>
+                    <div class="number">10</div>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <div>
+                <div class="img"><a href="/team/person?Acnt=0000005540" style="background-image:url('/files/atts/0L088846283692901115/21李凱威2024.jpg')" title="李凱威"><span>李凱威</span></a></div>
+                <div class="cont">
+                    <div class="pos">二壘手</div>
+                    <div class="name"><a href="/team/person?Acnt=0000005540">李凱威</a></div>
+                    <div class="number">21</div>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <div>
+                <div class="img"><a href="/team/person?Acnt=0000007079" style="background-image:url('/files/atts/0N294458415609427125/102劉俊緯2024.jpg')" title="劉俊緯"><span>劉俊緯</span></a></div>
+                <div class="cont">
+                    <div class="pos">游擊手</div>
+                    <div class="name"><a href="/team/person?Acnt=0000007079">劉俊緯</a></div>
+                    <div class="number">23</div>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <div>
+                <div class="img"><a href="/team/person?Acnt=0000005542" style="background-image:url('/files/atts/0L088847274945283727/25張政禹2024.jpg')" title="張政禹"><span>張政禹</span></a></div>
+                <div class="cont">
+                    <div class="pos">游擊手</div>
+                    <div class="name"><a href="/team/person?Acnt=0000005542">張政禹</a></div>
+                    <div class="number">25</div>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <div>
+                <div class="img"><a href="/team/person?Acnt=0000007082" style="background-image:url('/files/atts/0N294458050749307006/26陽念祖.JPG')" title="陽念祖"><span>陽念祖</span></a></div>
+                <div class="cont">
+                    <div class="pos">游擊手</div>
+                    <div class="name"><a href="/team/person?Acnt=0000007082">陽念祖</a></div>
+                    <div class="number">26</div>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <div>
+                <div class="img"><a href="/team/person?Acnt=0000006728" style="background-image:url('/files/atts/0L281593137621782872/44陳思仲2024.jpg')" title="陳思仲"><span>陳思仲</span></a></div>
+                <div class="cont">
+                    <div class="pos">二壘手</div>
+                    <div class="name"><a href="/team/person?Acnt=0000006728">陳思仲</a></div>
+                    <div class="number">44</div>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <div>
+                <div class="img"><a href="/team/person?Acnt=0000005545" style="background-image:url('/files/atts/0L088849611083090300/46劉基鴻2024.jpg')" title="劉基鴻"><span>劉基鴻</span></a></div>
+                <div class="cont">
+                    <div class="pos">三壘手</div>
+                    <div class="name"><a href="/team/person?Acnt=0000005545">劉基鴻</a></div>
+                    <div class="number">46</div>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <div>
+                <div class="img"><a href="/team/person?Acnt=0000005546" style="background-image:url('/files/atts/0L088845395240194639/拿莫伊漾S.jpg')" title="拿莫．伊漾"><span>拿莫．伊漾</span></a></div>
+                <div class="cont">
+                    <div class="pos">一壘手</div>
+                    <div class="name"><a href="/team/person?Acnt=0000005546">拿莫．伊漾</a></div>
+                    <div class="number">57</div>
+                </div>
+            </div>
+        </div>
+</div>
+
+<div class="cat_title"><a name="outfielder" id="outfielder"></a>外野手</div>
+<div class="TeamPlayersList">
+        <div class="item">
+            <div>
+                <div class="img"><a href="/team/person?Acnt=0000005548" style="background-image:url('/files/atts/0L088846388939219477/1林孝程2024.jpg')" title="林孝程"><span>林孝程</span></a></div>
+                <div class="cont">
+                    <div class="pos">右外野手</div>
+                    <div class="name"><a href="/team/person?Acnt=0000005548">林孝程</a></div>
+                    <div class="number">1</div>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <div>
+                <div class="img"><a href="/team/person?Acnt=0000005549" style="background-image:url('/files/atts/0L088847591564374230/2郭天信2024.jpg')" title="郭天信"><span>郭天信</span></a></div>
+                <div class="cont">
+                    <div class="pos">中外野手</div>
+                    <div class="name"><a href="/team/person?Acnt=0000005549">郭天信</a></div>
+                    <div class="number">2</div>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <div>
+                <div class="img"><a href="/team/person?Acnt=0000006216" style="background-image:url('/files/atts/0L088844419941267987/24王順和2024-1.jpg')" title="王順和"><span>王順和</span></a></div>
+                <div class="cont">
+                    <div class="pos">中外野手</div>
+                    <div class="name"><a href="/team/person?Acnt=0000006216">王順和</a></div>
+                    <div class="number">24</div>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <div>
+                <div class="img"><a href="/team/person?Acnt=0000006725" style="background-image:url('/files/atts/0L281592278495807710/81張祐嘉.JPG')" title="張祐嘉"><span>張祐嘉</span></a></div>
+                <div class="cont">
+                    <div class="pos">左外野手</div>
+                    <div class="name"><a href="/team/person?Acnt=0000006725">張祐嘉</a></div>
+                    <div class="number">81</div>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <div>
+                <div class="img"><a href="/team/person?Acnt=0000006879" style="background-image:url('/files/atts/0M270550454730394786/82冉承霖.JPG')" title="冉承霖"><span>冉承霖</span></a></div>
+                <div class="cont">
+                    <div class="pos">中外野手</div>
+                    <div class="name"><a href="/team/person?Acnt=0000006879">冉承霖</a></div>
+                    <div class="number">82</div>
+                </div>
+            </div>
+        </div>
+</div>
+                    </div>
+                </div>
+                <!--球員列表 end-->
+                <!--二軍才會出現以下資訊-->
+                <div class="name_symbol_list">
+                    ＃ - 註銷註冊 / 一年僅限一次，球員經註銷註冊後，仍為球團合約所屬球員，惟同一球季不得再行註冊，僅得於二軍出賽。<br />
+                    ✽ - 合約所屬球員 / 僅得於二軍出賽，但於每年8月31日前，得註冊成為球團60人球員。<br />
+                    ◎ - 自主培訓、自行培訓、測試洋將/尚未經註冊之選手、洋將，僅能於二軍出賽，且不占用球隊洋將名額之外籍球員。
+                </div>
+                <!-- InstanceEndEditable -->
+            </div>
+</form>    </div>
+
+<form action="/member/followteam?clubno=AAA" id="FollowTeamForm" method="post"><input name="__RequestVerificationToken" type="hidden" value="b3VP2xfcYBIXAw9zESK3gi6-dWpmuthHjN1YAG0_-OOE1KxjJ3jZf30rtBtd16155DSkWbttwDAiLagAys3X9bZX-ec1" /></form>
+<script type="text/javascript">
+    $(".dev-following-oper").show();
+    $(".dev-unfollow-oper").hide();
+</script>
+
+<script type="text/javascript">
+
+    
+    function followTeam(teamNo, action) {
+        var form = $("form[id='FollowTeamForm']");
+
+        $("body").block({ message: '<img alt="" border="0" src="/theme/common/images/loader.gif" />', css: { width: "32px", height: "32px", border: "0px" }, overlayCSS: { backgroundColor: "#fff" } });
+
+        $.ajax({
+            url: "/member/followteam",
+            type: "post",
+            async: true,
+            data: { teamNo: teamNo, action: action, __RequestVerificationToken: form.find("input[name='__RequestVerificationToken']").val() },
+            success: function (result) {
+                if (result.Success) {
+                    if (action === 1) {
+                        $(".dev-following-oper").hide();
+                        $(".dev-unfollow-oper").show();
+                    } else {
+                        $(".dev-following-oper").show();
+                        $(".dev-unfollow-oper").hide();
+                    }
+                    $(".dev-total-followers").html(result.TotalFollowers);
+                }
+            },
+            error: function (errMsg) {
+                console.log(errMsg)
+            },
+            complete: function () {
+                $("body").unblock()
+            }
+        });
+    }
+
+</script>
+
+
+
+        <div class="BtnTop">
+            <a href="#" title="回最上層">TOP</a>
+        </div>
+
+        <footer id="Footer">
+            <div>
+                <div class="btn_links">
+                    <ul>
+                            <li><a href="https://www.sportslottery.com.tw/" target="_blank" title="台灣運彩"><span><img src="https://www.cpbl.com.tw/files/file_pool/1/0l137348447265964005/12_2.jpg" alt="台灣運彩" /></span></a></li>
+                            <li><a href="https://www.cpbl.com.tw/news/cont?q=%E7%90%83%E6%A3%92%E8%AA%8D%E8%AD%89&amp;sid=0O318425694024798050" target="_blank" title="球棒認證公告"><span><img src="https://www.cpbl.com.tw/files/file_pool/1/0l109743480637249470/14.jpg" alt="球棒認證公告" /></span></a></li>
+                            <li><a href="https://www.cpbl.com.tw/xmdoc/cont?sid=0L132724366328939235" target="_blank" title="已完成球棒之比賽用球棒廠商"><span><img src="https://www.cpbl.com.tw/files/file_pool/1/0l109743480193360443/15.jpg" alt="已完成球棒之比賽用球棒廠商" /></span></a></li>
+                            <li><a href="https://www.cpbl.com.tw/xmdoc/cont?&amp;sid=0L132769227389558635" target="_blank" title="中華職棒業務合作"><span><img src="https://www.cpbl.com.tw/files/file_pool/1/0l109743480559491425/16.jpg" alt="中華職棒業務合作" /></span></a></li>
+                            <li><a href="http://twbaa.org/" target="_blank" title="台灣女子棒球運動推廣協會"><span><img src="https://www.cpbl.com.tw/files/file_pool/1/0l109746420739708798/twbaa_logo_full-color-rgb-01.jpg" alt="台灣女子棒球運動推廣協會" /></span></a></li>
+                            <li><a href="https://www.cpbl.com.tw/news/cont?sid=0M003476575671626729" target="_blank" title="官網招募"><span><img src="https://www.cpbl.com.tw/files/file_pool/1/0l244602968503278790/2021%e5%ae%98%e7%b6%b2_%e6%8b%9b%e5%8b%9fbanner.png" alt="官網招募" /></span></a></li>
+                            <li><a href="https://www.cpbl.com.tw/eshop" target="_blank" title="CPBL商城"><span><img src="https://www.cpbl.com.tw/files/file_pool/1/0o278578272640193805/2024%e5%ae%98%e7%b6%b2banner.png" alt="CPBL商城" /></span></a></li>
+                    </ul>
+                </div>
+
+                <div class="teams">
+                    <ul>
+                            <li><a href="/team?ClubNo=ACN" title="中信兄弟" style="background-image:url('/files/file_pool/1/0l109765752552535770/logo_brothers_large.png')">中信兄弟</a></li>
+                            <li><a href="/team?ClubNo=ADD" title="統一7-ELEVEn獅" style="background-image:url('/files/file_pool/1/0l109765751918656742/logo_lions_large.png')">統一7-ELEVEn獅</a></li>
+                            <li><a href="/team?ClubNo=AJL" title="樂天桃猿" style="background-image:url('/files/file_pool/1/0o012550226923298142/2024_cpbl%e5%85%ad%e9%9a%8alogo_r_%e5%ae%98%e7%b6%b2.png')">樂天桃猿</a></li>
+                            <li><a href="/team?ClubNo=AEO" title="富邦悍將" style="background-image:url('/files/file_pool/1/0l109765750739708798/logo_fubon_large.png')">富邦悍將</a></li>
+                            <li><a href="/team?ClubNo=AAA" title="味全龍" style="background-image:url('/files/file_pool/1/0l109765750195839770/logo_dragon_large.png')">味全龍</a></li>
+                            <li><a href="/team?ClubNo=AKP" title="台鋼雄鷹" style="background-image:url('https://www.cpbl.com.tw/files/file_pool/1/0n255385839510091777/tsg-logo0912.png')">台鋼雄鷹</a></li>
+                    </ul>
+                </div>
+
+                <div class="col_left">
+                    <div class="logo"><div style="background-image:url(/theme/common/images/project/logo_new.png)">中華職棒大聯盟全球資訊網 The Official Site of CPBL</div></div>
+                    <div class="footer_menu">
+                        <ul>
+                            <li><a href="/about/about">關於中職</a></li>
+                            <li><a href="/contactus">聯絡我們</a></li>
+                            <li><a href="http://museum.cpbl.com.tw/" target="_blank">線上文物館</a></li>
+                            <li><a href="/field">球場介紹</a></li>
+                            <li><a href="/teamhistory">球隊沿革</a></li>
+                            <li><a href="https://www.cpbl.com.tw/files/file_pool/1/0o078627890469226051/2024%e6%a3%92%e7%90%83%e8%a6%8f%e5%89%87%28%e5%ae%98%e7%b6%b2%e7%94%a8%29.pdf" target="_blank">棒球規則</a></li>
+                            <li><a href="/theme/client/download/%e8%a3%81%e5%88%a4%e5%9f%b7%e6%b3%95%e6%89%8b%e5%86%8a%e8%a6%8f%e5%89%87%e8%a3%9c%e8%bf%b0.pdf" target="_blank">棒球補述</a></li>
+                            <li><a href="/theme/client/download/%e8%81%af%e7%9b%9f%e8%a6%8f%e7%ab%a0.pdf" target="_blank">聯盟規章</a></li>
+                            <li><a href="/sitenav">網站地圖</a></li>
+                        </ul>
+                    </div>
+                    <div class="copyright">
+                        中華職棒 版權所有 &copy;
+                        2024
+                        All rights reserved.
+                    </div>
+                </div>
+
+                <div class="col_right">
+                    <div class="follow_us">
+                        <dl>
+                            <dt>關注我們：</dt>
+                            <dd class="fb"><a href="https://www.facebook.com/heartbaseball?fref=ts" target="_blank" title="(開啟新視窗)">Facebook粉絲團</a></dd>
+                            <dd class="ig"><a href="https://www.instagram.com/cpbl_official/?hl=zh-tw" target="_blank" title="(開啟新視窗)">Instagram</a></dd>
+                            <dd class="youtube"><a href="https://www.youtube.com/user/CPBLofficial" target="_blank" title="(開啟新視窗)">YouTube頻道</a></dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <div id="nav">
+            <div class="switch"><a href="#MenuMobile"><span class="menu-action"><i></i></span></a></div>
+            <div id="MenuMobile">
+                <ul>
+                    <li class="mm-search"></li>
+                    <li><a href="/">首頁</a></li>
+                    <li><a href="/xmdoc">最新消息</a></li>
+                    <li><a href="/schedule">賽程</a></li>
+                    <li><a href="/box">成績看板</a></li>
+                    <li><a href="/standings/season">球隊戰績</a></li>
+                    <li>
+                        <a href="javascript:;">數據統計</a>
+                        <ul>
+                            <li><a href="/stats/toplist">單項排行榜</a></li>
+                            <li><a href="/stats/recordall">全記錄查詢</a></li>
+                            <li><a href="/stats/yearaward">年度獎項得主</a></li>
+                            <li><a href="/stats/hr">歷年全壘打明細</a></li>
+                            <li><a href="/stats/mvp">單月MVP</a></li>
+                            <li><a href="/specialreport/cont?SId=0L090754347267822514">紀錄特別報導</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;">球隊</a>
+                        <ul>
+                                <li><a href="/team?ClubNo=ACN">中信兄弟</a></li>
+                                <li><a href="/team?ClubNo=ADD">統一7-ELEVEn獅</a></li>
+                                <li><a href="/team?ClubNo=AJL">樂天桃猿</a></li>
+                                <li><a href="/team?ClubNo=AEO">富邦悍將</a></li>
+                                <li><a href="/team?ClubNo=AAA">味全龍</a></li>
+                                <li><a href="/team?ClubNo=AKP">台鋼雄鷹</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;">球員</a>
+                        <ul>
+                            <li><a href="/player">球員點將錄</a></li>
+                            <li><a href="/player/trans">球員異動</a></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="https://www.cpbl.com.tw/eshop">商城</a>
+                    </li>
+
+                    <li>
+                        <a href="https://awb.cpbl.com.tw">冬盟</a>
+                    </li>
+
+                    <!--li><a href="javascript:;">票務</a></li-->
+                    
+                    <li><a href="/about/about">關於中職</a></li>
+                    <li><a href="/contactus">聯絡我們</a></li>
+                    <li><a href="http://museum.cpbl.com.tw" target="_blank">線上文物館</a></li>
+                    <li><a href="/field">球場介紹</a></li>
+                    <li><a href="https://www.cpbl.com.tw/files/file_pool/1/0o078627890469226051/2024%e6%a3%92%e7%90%83%e8%a6%8f%e5%89%87%28%e5%ae%98%e7%b6%b2%e7%94%a8%29.pdf" target="_blank">棒球規則</a></li>
+                    <li><a href="/theme/client/download/%e8%a3%81%e5%88%a4%e5%9f%b7%e6%b3%95%e6%89%8b%e5%86%8a%e8%a6%8f%e5%89%87%e8%a3%9c%e8%bf%b0.pdf" target="_blank">棒球補述</a></li>
+                    <li><a href="/theme/client/download/%e8%81%af%e7%9b%9f%e8%a6%8f%e7%ab%a0.pdf" target="_blank">聯盟規章</a></li>
+                    <li><a href="/sitenav">網站地圖</a></li>
+                            <li><a href="https://www.cpbl.com.tw/login">登入丨註冊</a></li>
+                    <li><a href="https://en.cpbl.com.tw">English</a></li>
+                    
+                    
+                    <li><a href="https://hamivideo.hinet.net/main/606.do" target="_blank">CPBLTV</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    
+
+
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XVM9WZM59B"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-XVM9WZM59B');
+    </script>
+</body>
+</html>
