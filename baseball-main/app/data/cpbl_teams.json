@@ -1,0 +1,1448 @@
+{
+  "ACN": {
+    "team_info": {
+      "name": "中信兄弟",
+      "history": "兄弟象(1990-2013) – 中信兄弟(2014 - 至今)",
+      "established": "1990",
+      "coach": "平野恵一",
+      "home": "台中洲際棒球場"
+    },
+    "players": {
+      "coaches": [
+        {
+          "name": "平野惠一",
+          "number": "10",
+          "position": "一軍總教練",
+          "photo": "/files/atts/0M087545767524625929/10平野惠一.jpg"
+        },
+        {
+          "name": "石志偉",
+          "number": "36",
+          "position": "一軍內野教練",
+          "photo": "/files/atts/0L087781855809015809/36石志偉2024.jpg"
+        },
+        {
+          "name": "艾迪頓",
+          "number": "53",
+          "position": "一軍牛棚教練",
+          "photo": "/files/atts/0L087781985807546572/53艾迪頓2024.jpg"
+        },
+        {
+          "name": "陳皓然",
+          "number": "57",
+          "position": "一軍外野守備/跑壘教練",
+          "photo": "/files/atts/0L087782105831120102/陳皓然2024.jpg"
+        },
+        {
+          "name": "丹尼爾",
+          "number": "5",
+          "position": "一軍打擊教練",
+          "photo": "/files/atts/0O058613728922268905/05.jpg"
+        },
+        {
+          "name": "王建民",
+          "number": "40",
+          "position": "一軍投手教練",
+          "photo": "/files/atts/0L088837764085020215/40王建民2024.jpg"
+        },
+        {
+          "name": "王峻杰",
+          "number": "45",
+          "position": "一軍投捕教練",
+          "photo": "/files/atts/0L087782152091265436/45_王峻杰.jpg"
+        },
+        {
+          "name": "陳江和",
+          "number": "31",
+          "position": "一軍首席/打擊教練",
+          "photo": "/files/atts/0L087782082878960088/31_陳江和.jpg"
+        },
+        {
+          "name": "周思齊",
+          "number": "16",
+          "position": "一軍教練",
+          "photo": "/files/atts/0L087781997973555156/周思齊2024.png"
+        },
+        {
+          "name": "李尚儒",
+          "number": "25",
+          "position": "一軍體能教練",
+          "photo": "/files/atts/0L088839130245676258/25李尚儒2024.jpg"
+        },
+        {
+          "name": "陳弘桂",
+          "number": "51",
+          "position": "一軍體能教練",
+          "photo": "/files/atts/0L087781974920385042/51陳弘桂.jpg"
+        }
+      ],
+      "pitchers": [
+        {
+          "name": "克迪",
+          "number": "18",
+          "position": "投手"
+        },
+        {
+          "name": "鄭凱文",
+          "number": "19",
+          "position": "投手"
+        },
+        {
+          "name": "李振昌",
+          "number": "34",
+          "position": "投手"
+        },
+        {
+          "name": "德保拉",
+          "number": "46",
+          "position": "投手"
+        },
+        {
+          "name": "余謙",
+          "number": "49",
+          "position": "投手"
+        },
+        {
+          "name": "蔡齊哲",
+          "number": "50",
+          "position": "投手"
+        },
+        {
+          "name": "王奕凱",
+          "number": "54",
+          "position": "投手"
+        },
+        {
+          "name": "陳柏均",
+          "number": "56",
+          "position": "投手"
+        },
+        {
+          "name": "呂彥青",
+          "number": "58",
+          "position": "投手"
+        },
+        {
+          "name": "陳琥",
+          "number": "62",
+          "position": "投手"
+        },
+        {
+          "name": "黃恩賜",
+          "number": "64",
+          "position": "投手"
+        },
+        {
+          "name": "謝榮豪",
+          "number": "79",
+          "position": "投手"
+        },
+        {
+          "name": "猛登",
+          "number": "80",
+          "position": "投手"
+        },
+        {
+          "name": "吳俊偉",
+          "number": "94",
+          "position": "投手"
+        }
+      ],
+      "catchers": [
+        {
+          "name": "林吳晉瑋",
+          "number": "0",
+          "position": "捕手"
+        },
+        {
+          "name": "陳統恩",
+          "number": "48",
+          "position": "捕手"
+        },
+        {
+          "name": "高宇杰",
+          "number": "65",
+          "position": "捕手"
+        }
+      ],
+      "infielders": [
+        {
+          "name": "張士綸",
+          "number": "4",
+          "position": "游擊手"
+        },
+        {
+          "name": "王威晨",
+          "number": "9",
+          "position": "三壘手"
+        },
+        {
+          "name": "陳俊秀",
+          "number": "29",
+          "position": "一壘手"
+        },
+        {
+          "name": "林志綱",
+          "number": "47",
+          "position": "三壘手"
+        },
+        {
+          "name": "王政順",
+          "number": "61",
+          "position": "三壘手"
+        },
+        {
+          "name": "許基宏",
+          "number": "74",
+          "position": "一壘手"
+        },
+        {
+          "name": "江坤宇",
+          "number": "90",
+          "position": "游擊手"
+        },
+        {
+          "name": "岳東華",
+          "number": "98",
+          "position": "二壘手"
+        }
+      ],
+      "outfielders": [
+        {
+          "name": "陳子豪",
+          "number": "1",
+          "position": "右外野手"
+        },
+        {
+          "name": "張志豪",
+          "number": "7",
+          "position": "中外野手"
+        },
+        {
+          "name": "曾頌恩",
+          "number": "32",
+          "position": "中外野手"
+        },
+        {
+          "name": "詹子賢",
+          "number": "39",
+          "position": "左外野手"
+        },
+        {
+          "name": "林書逸",
+          "number": "43",
+          "position": "中外野手"
+        },
+        {
+          "name": "宋晟睿",
+          "number": "88",
+          "position": "左外野手"
+        },
+        {
+          "name": "岳政華",
+          "number": "92",
+          "position": "中外野手"
+        }
+      ]
+    }
+  },
+  "ADD": {
+    "team_info": {
+      "name": "統一7-ELEVEn獅",
+      "history": "統一獅(1990-2007) – 統一7-ELEVEn獅(2008 - 至今 )",
+      "established": "1990",
+      "coach": "林岳平",
+      "home": "台南棒球場"
+    },
+    "players": {
+      "coaches": [
+        {
+          "name": "林岳平",
+          "number": "11",
+          "position": "一軍總教練",
+          "photo": "/files/atts/0L087782068645942929/11 林岳平.jpg"
+        },
+        {
+          "name": "周廣勝",
+          "number": "70",
+          "position": "一軍內野教練",
+          "photo": "/files/atts/0L087782123079036784/70周廣勝2024.jpg"
+        },
+        {
+          "name": "羅錦龍",
+          "number": "71",
+          "position": "一軍牛棚教練",
+          "photo": "/files/atts/0L087782151813417482/71羅錦龍2024.jpg"
+        },
+        {
+          "name": "莊駿凱",
+          "number": "80",
+          "position": "一軍外野兼跑壘教練",
+          "photo": "/files/atts/0L087782023463168224/80莊駿凱2024.jpg"
+        },
+        {
+          "name": "馬修爾",
+          "number": "22",
+          "position": "一軍打擊教練",
+          "photo": "/files/atts/0N066385580224227097/22馬修爾2024.jpg"
+        },
+        {
+          "name": "玉木朋孝",
+          "number": "76",
+          "position": "一軍守備暨跑壘教練",
+          "photo": "/files/atts/0N066387414375425253/76玉木朋孝2024.jpg"
+        },
+        {
+          "name": "潘武雄",
+          "number": "55",
+          "position": "一軍助理打擊教練",
+          "photo": "/files/atts/0L087782065374022432/55潘武雄2024.jpg"
+        },
+        {
+          "name": "鄭博壬",
+          "number": "81",
+          "position": "一軍投手教練",
+          "photo": "/files/atts/0L087782095588848699/81鄭博壬2024.jpg"
+        },
+        {
+          "name": "霍斯曼",
+          "number": "98",
+          "position": "一軍投手教練",
+          "photo": "/theme/client/images/player_no_img.jpg"
+        },
+        {
+          "name": "高志綱",
+          "number": "34",
+          "position": "一軍首席教練",
+          "photo": "/files/atts/0L087782064917427433/高志綱M.jpg"
+        },
+        {
+          "name": "陳俊輝",
+          "number": "82",
+          "position": "一軍捕手教練",
+          "photo": "/files/atts/0L087782069824790974/82陳俊輝2024.jpg"
+        },
+        {
+          "name": "吳秉軒",
+          "number": "94",
+          "position": "一軍體能教練",
+          "photo": "/files/atts/0O058615042100629928/94吳秉軒2024.jpg"
+        }
+      ],
+      "pitchers": [
+        {
+          "name": "陳韻文",
+          "number": "12",
+          "position": "投手"
+        },
+        {
+          "name": "郭俊麟",
+          "number": "16",
+          "position": "投手"
+        },
+        {
+          "name": "林子崴",
+          "number": "17",
+          "position": "投手"
+        },
+        {
+          "name": "古林睿煬",
+          "number": "19",
+          "position": "投手"
+        },
+        {
+          "name": "勝騎士",
+          "number": "21",
+          "position": "投手"
+        },
+        {
+          "name": "高塩將樹",
+          "number": "28",
+          "position": "投手"
+        },
+        {
+          "name": "邱浩鈞",
+          "number": "37",
+          "position": "投手"
+        },
+        {
+          "name": "黃竣彥",
+          "number": "40",
+          "position": "投手"
+        },
+        {
+          "name": "王鏡銘",
+          "number": "41",
+          "position": "投手"
+        },
+        {
+          "name": "裴瑞茲",
+          "number": "43",
+          "position": "投手"
+        },
+        {
+          "name": "羅昂",
+          "number": "44",
+          "position": "投手"
+        },
+        {
+          "name": "吳承諭",
+          "number": "57",
+          "position": "投手"
+        },
+        {
+          "name": "胡智爲",
+          "number": "58",
+          "position": "投手"
+        },
+        {
+          "name": "辛俊昇",
+          "number": "69",
+          "position": "投手"
+        },
+        {
+          "name": "林詔恩",
+          "number": "74",
+          "position": "投手"
+        }
+      ],
+      "catchers": [
+        {
+          "name": "林岱安",
+          "number": "31",
+          "position": "捕手"
+        },
+        {
+          "name": "柯育民",
+          "number": "36",
+          "position": "捕手"
+        },
+        {
+          "name": "陳重羽",
+          "number": "65",
+          "position": "捕手"
+        }
+      ],
+      "infielders": [
+        {
+          "name": "許哲晏",
+          "number": "10",
+          "position": "游擊手"
+        },
+        {
+          "name": "陳鏞基",
+          "number": "13",
+          "position": "三壘手"
+        },
+        {
+          "name": "陳聖平",
+          "number": "15",
+          "position": "游擊手"
+        },
+        {
+          "name": "潘傑楷",
+          "number": "35",
+          "position": "三壘手"
+        },
+        {
+          "name": "張皓崴",
+          "number": "38",
+          "position": "游擊手"
+        },
+        {
+          "name": "林祖傑",
+          "number": "39",
+          "position": "游擊手"
+        },
+        {
+          "name": "陳重廷",
+          "number": "66",
+          "position": "游擊手"
+        },
+        {
+          "name": "林益全",
+          "number": "99",
+          "position": "一壘手"
+        }
+      ],
+      "outfielders": [
+        {
+          "name": "邱智呈",
+          "number": "14",
+          "position": "右外野手"
+        },
+        {
+          "name": "林佳緯",
+          "number": "20",
+          "position": "左外野手"
+        },
+        {
+          "name": "陳傑憲",
+          "number": "24",
+          "position": "中外野手"
+        },
+        {
+          "name": "蘇智傑",
+          "number": "32",
+          "position": "左外野手"
+        },
+        {
+          "name": "胡金龍",
+          "number": "51",
+          "position": "左外野手"
+        },
+        {
+          "name": "林安可",
+          "number": "77",
+          "position": "右外野手"
+        }
+      ]
+    }
+  },
+  "AJL": {
+    "team_info": {
+      "name": "樂天桃猿",
+      "history": "第一金剛(2003) – La new熊(2004-2010) – Lamigo 桃猿(2011-2019) – 樂天桃猿(2020 - 至今)",
+      "established": "2003",
+      "coach": "古久保健二",
+      "home": "桃園國際棒球場"
+    },
+    "players": {
+      "coaches": [
+        {
+          "name": "古久保健二",
+          "number": "87",
+          "position": "一軍總教練",
+          "photo": "/files/atts/0L088856345605202263/古久保健二.jpg"
+        },
+        {
+          "name": "林英傑",
+          "number": "43",
+          "position": "一軍牛棚教練",
+          "photo": "/files/atts/0L087781995516959166/林英傑.jpg"
+        },
+        {
+          "name": "鍾承祐",
+          "number": "57",
+          "position": "一軍打擊教練",
+          "photo": "/files/atts/0L087782121887874242/鍾承祐.jpg"
+        },
+        {
+          "name": "林政億",
+          "number": "90",
+          "position": "一軍打擊教練",
+          "photo": "/files/atts/0L087782146732519483/林政億.jpg"
+        },
+        {
+          "name": "陳彥夆",
+          "number": "91",
+          "position": "一軍守備教練",
+          "photo": "/files/atts/0L111539309105109813/陳彥夆.jpg"
+        },
+        {
+          "name": "許銘傑",
+          "number": "23",
+          "position": "一軍投手教練",
+          "photo": "/files/atts/0L087781878507153940/許銘傑.jpg"
+        },
+        {
+          "name": "許躍騰",
+          "number": "50",
+          "position": "一軍投捕教練",
+          "photo": "/files/atts/0L087782129064148270/許躍騰.jpg"
+        },
+        {
+          "name": "陳瑞振",
+          "number": "71",
+          "position": "一軍首席教練",
+          "photo": "/files/atts/0L087781955059851487/陳瑞振.jpg"
+        },
+        {
+          "name": "鄭兆行",
+          "number": "41",
+          "position": "一軍綜合守備教練",
+          "photo": "/files/atts/0L087781898546435640/鄭兆行.jpg"
+        },
+        {
+          "name": "洪全億",
+          "number": "42",
+          "position": "一軍體能教練",
+          "photo": "/files/atts/0L088834494577204145/洪全億.jpg"
+        },
+        {
+          "name": "劉品辰",
+          "number": "59",
+          "position": "一軍體能教練",
+          "photo": "/files/atts/0L087782159456711482/劉品辰.jpg"
+        }
+      ],
+      "pitchers": [
+        {
+          "name": "蘇俊璋",
+          "number": "00",
+          "position": "投手"
+        },
+        {
+          "name": "黃偉晟",
+          "number": "4",
+          "position": "投手"
+        },
+        {
+          "name": "陳柏豪",
+          "number": "9",
+          "position": "投手"
+        },
+        {
+          "name": "陳鴻文",
+          "number": "13",
+          "position": "投手"
+        },
+        {
+          "name": "陳冠宇",
+          "number": "17",
+          "position": "投手"
+        },
+        {
+          "name": "陳克羿",
+          "number": "19",
+          "position": "投手"
+        },
+        {
+          "name": "魔神樂",
+          "number": "21",
+          "position": "投手"
+        },
+        {
+          "name": "肯特",
+          "number": "25",
+          "position": "投手"
+        },
+        {
+          "name": "邱駿威",
+          "number": "46",
+          "position": "投手"
+        },
+        {
+          "name": "威能帝",
+          "number": "49",
+          "position": "投手"
+        },
+        {
+          "name": "王志煊",
+          "number": "64",
+          "position": "投手"
+        },
+        {
+          "name": "黃子鵬",
+          "number": "69",
+          "position": "投手"
+        },
+        {
+          "name": "莊昕諺",
+          "number": "77",
+          "position": "投手"
+        },
+        {
+          "name": "李家明",
+          "number": "92",
+          "position": "投手"
+        }
+      ],
+      "catchers": [
+        {
+          "name": "宋嘉翔",
+          "number": "2",
+          "position": "捕手"
+        },
+        {
+          "name": "林泓育",
+          "number": "11",
+          "position": "捕手"
+        },
+        {
+          "name": "張閔勛",
+          "number": "28",
+          "position": "捕手"
+        },
+        {
+          "name": "毛英傑",
+          "number": "89",
+          "position": "捕手"
+        }
+      ],
+      "infielders": [
+        {
+          "name": "梁家榮",
+          "number": "5",
+          "position": "三壘手"
+        },
+        {
+          "name": "林承飛",
+          "number": "6",
+          "position": "游擊手"
+        },
+        {
+          "name": "林子偉",
+          "number": "15",
+          "position": "二壘手"
+        },
+        {
+          "name": "林立",
+          "number": "39",
+          "position": "二壘手"
+        },
+        {
+          "name": "馮健庭",
+          "number": "45",
+          "position": "二壘手"
+        },
+        {
+          "name": "廖健富",
+          "number": "58",
+          "position": "一壘手"
+        },
+        {
+          "name": "林智平",
+          "number": "79",
+          "position": "三壘手"
+        },
+        {
+          "name": "朱育賢",
+          "number": "85",
+          "position": "一壘手"
+        },
+        {
+          "name": "馬傑森",
+          "number": "94",
+          "position": "游擊手"
+        }
+      ],
+      "outfielders": [
+        {
+          "name": "蔡鎮宇",
+          "number": "24",
+          "position": "左外野手"
+        },
+        {
+          "name": "余德龍",
+          "number": "36",
+          "position": "左外野手"
+        },
+        {
+          "name": "林政華",
+          "number": "65",
+          "position": "中外野手"
+        },
+        {
+          "name": "鍾玉成",
+          "number": "97",
+          "position": "右外野手"
+        },
+        {
+          "name": "陳晨威",
+          "number": "98",
+          "position": "中外野手"
+        }
+      ]
+    }
+  },
+  "AEO": {
+    "team_info": {
+      "name": "富邦悍將",
+      "history": "俊國熊(1993-1995) – 興農熊(1996上半季) – 興農牛(1996下半季 – 2012) – 義大犀牛(2013-2016) – 富邦悍將(2017 - 至今)",
+      "established": "1993",
+      "coach": "陳金鋒",
+      "home": "新莊棒球場"
+    },
+    "players": {
+      "coaches": [
+        {
+          "name": "陳金鋒",
+          "number": "52",
+          "position": "一軍總教練",
+          "photo": "/files/atts/0L087781864430670439/52陳金鋒.jpg"
+        },
+        {
+          "name": "施金典",
+          "number": "68",
+          "position": "一軍內野教練",
+          "photo": "/files/atts/0L087782069280811947/68施金典.jpg"
+        },
+        {
+          "name": "稲田直人",
+          "number": "51",
+          "position": "一軍內野統籌教練",
+          "photo": "/files/atts/0O058617967769263238/51稻田直人.jpg"
+        },
+        {
+          "name": "林正豐",
+          "number": "42",
+          "position": "一軍牛棚教練",
+          "photo": "/files/atts/0L087782083056708033/42林正豐.JPG"
+        },
+        {
+          "name": "詹智堯",
+          "number": "8",
+          "position": "一軍外野教練",
+          "photo": "/files/atts/0L087782212422109258/8詹智堯.jpg"
+        },
+        {
+          "name": "陳連宏",
+          "number": "84",
+          "position": "一軍打擊教練",
+          "photo": "/files/atts/0L087782184385393675/99陳連宏.jpg"
+        },
+        {
+          "name": "垣內哲也",
+          "number": "72",
+          "position": "一軍打擊策略教練",
+          "photo": "/files/atts/0N062557573626121933/72垣內哲也.jpg"
+        },
+        {
+          "name": "郭勇志",
+          "number": "40",
+          "position": "一軍投手教練",
+          "photo": "/files/atts/0L087781890903030640/40郭勇志2024.jpg"
+        },
+        {
+          "name": "丘昌榮",
+          "number": "91",
+          "position": "一軍首席教練",
+          "photo": "/files/atts/0L087781994438101112/91丘昌榮.jpg"
+        },
+        {
+          "name": "黃浩然",
+          "number": "27",
+          "position": "一軍捕手教練",
+          "photo": "/files/atts/0L087782088328292546/27黃浩然2024.jpg"
+        },
+        {
+          "name": "杜正文",
+          "number": "53",
+          "position": "一軍體能教練",
+          "photo": "/files/atts/0L088832781322447606/53杜正文2024.jpg"
+        },
+        {
+          "name": "陳柏穎",
+          "number": "92",
+          "position": "一軍體能教練",
+          "photo": "/files/atts/0L088858683956554860/92陳柏穎.jpg"
+        }
+      ],
+      "pitchers": [
+        {
+          "name": "陳品宏",
+          "number": "00",
+          "position": "投手"
+        },
+        {
+          "name": "班恩",
+          "number": "23",
+          "position": "投手"
+        },
+        {
+          "name": "吳世豪",
+          "number": "50",
+          "position": "投手"
+        },
+        {
+          "name": "李建勳",
+          "number": "54",
+          "position": "投手"
+        },
+        {
+          "name": "歐書誠",
+          "number": "57",
+          "position": "投手"
+        },
+        {
+          "name": "曾峻岳",
+          "number": "60",
+          "position": "投手"
+        },
+        {
+          "name": "羅戈",
+          "number": "64",
+          "position": "投手"
+        },
+        {
+          "name": "李東洺",
+          "number": "66",
+          "position": "投手"
+        },
+        {
+          "name": "張瑞麟",
+          "number": "70",
+          "position": "投手"
+        },
+        {
+          "name": "林旺熙",
+          "number": "73",
+          "position": "投手"
+        },
+        {
+          "name": "富藍戈",
+          "number": "87",
+          "position": "投手"
+        },
+        {
+          "name": "林栚呈",
+          "number": "94",
+          "position": "投手"
+        }
+      ],
+      "catchers": [
+        {
+          "name": "姚冠瑋",
+          "number": "10",
+          "position": "捕手"
+        },
+        {
+          "name": "豊暐",
+          "number": "43",
+          "position": "捕手"
+        },
+        {
+          "name": "戴培峰",
+          "number": "95",
+          "position": "捕手"
+        }
+      ],
+      "infielders": [
+        {
+          "name": "林澤彬",
+          "number": "2",
+          "position": "二壘手"
+        },
+        {
+          "name": "王念好",
+          "number": "5",
+          "position": "三壘手"
+        },
+        {
+          "name": "葉子霆",
+          "number": "6",
+          "position": "游擊手"
+        },
+        {
+          "name": "楊閔貽",
+          "number": "24",
+          "position": "游擊手"
+        },
+        {
+          "name": "董子恩",
+          "number": "78",
+          "position": "三壘手"
+        },
+        {
+          "name": "劉俊豪",
+          "number": "85",
+          "position": "游擊手"
+        },
+        {
+          "name": "池恩齊",
+          "number": "97",
+          "position": "游擊手"
+        }
+      ],
+      "outfielders": [
+        {
+          "name": "潘瑋祥",
+          "number": "0",
+          "position": "中外野手"
+        },
+        {
+          "name": "陳真",
+          "number": "7",
+          "position": "左外野手"
+        },
+        {
+          "name": "申皓瑋",
+          "number": "29",
+          "position": "中外野手"
+        },
+        {
+          "name": "王正棠",
+          "number": "35",
+          "position": "右外野手"
+        },
+        {
+          "name": "蔡佳諺",
+          "number": "65",
+          "position": "中外野手"
+        },
+        {
+          "name": "周佳樂",
+          "number": "77",
+          "position": "中外野手"
+        }
+      ]
+    }
+  },
+  "AAA": {
+    "team_info": {
+      "name": "味全龍",
+      "history": "味全龍(1990-1999, 2019 - 至今)",
+      "established": "1990",
+      "coach": "葉君璋",
+      "home": "天母棒球場"
+    },
+    "players": {
+      "coaches": [
+        {
+          "name": "葉君璋",
+          "number": "27",
+          "position": "一軍總教練",
+          "photo": "/files/atts/0L087781937924784275/27葉君璋2024.jpg"
+        },
+        {
+          "name": "陳志偉",
+          "number": "86",
+          "position": "一軍內野教練",
+          "photo": "/files/atts/0L087781909434696180/86陳志偉2024.jpg"
+        },
+        {
+          "name": "黃亦志",
+          "number": "92",
+          "position": "一軍牛棚教練",
+          "photo": "/files/atts/0L087781914971514151/92黃亦志2024.jpg"
+        },
+        {
+          "name": "克魯茲",
+          "number": "14",
+          "position": "一軍打擊教練",
+          "photo": "/files/atts/0O253528697631712308/S__7012358_0.jpg"
+        },
+        {
+          "name": "張泰山",
+          "number": "49",
+          "position": "一軍打擊教練",
+          "photo": "/files/atts/0L087781938103532229/49張泰山2024.jpg"
+        },
+        {
+          "name": "張建銘",
+          "number": "66",
+          "position": "一軍打擊教練",
+          "photo": "/files/atts/0L087781907532121153/66張建銘2024.jpg"
+        },
+        {
+          "name": "郭勝安",
+          "number": "91",
+          "position": "一軍投手教練",
+          "photo": "/files/atts/0L087781879042032968/91郭勝安2024.jpg"
+        },
+        {
+          "name": "林瑋恩",
+          "number": "54",
+          "position": "一軍首席教練",
+          "photo": "/files/atts/0L087782107833605129/54林瑋恩2024.jpg"
+        },
+        {
+          "name": "高須洋介",
+          "number": "70",
+          "position": "一軍首席教練",
+          "photo": "/files/atts/0L088847168039820286/70高須洋介2024.jpg"
+        },
+        {
+          "name": "王膺鵬",
+          "number": "32",
+          "position": "一軍捕手教練",
+          "photo": "/files/atts/0M101612473411159880/32王膺鵬2024-1.jpg"
+        },
+        {
+          "name": "高孝儀",
+          "number": "95",
+          "position": "一軍跑壘教練",
+          "photo": "/files/atts/0L087781917341534648/95高孝儀.JPG"
+        },
+        {
+          "name": "邱世杰",
+          "number": "97",
+          "position": "一軍體能教練",
+          "photo": "/files/atts/0L088846957216103214/97邱世杰2024.jpg"
+        },
+        {
+          "name": "劉榮華",
+          "number": "76",
+          "position": "守備教練",
+          "photo": "/files/atts/0L087781885767709094/76劉榮華2024.jpg"
+        }
+      ],
+      "pitchers": [
+        {
+          "name": "李超",
+          "number": "0",
+          "position": "投手"
+        },
+        {
+          "name": "陳禹勳",
+          "number": "5",
+          "position": "投手"
+        },
+        {
+          "name": "廖任磊",
+          "number": "11",
+          "position": "投手"
+        },
+        {
+          "name": "劉昱言",
+          "number": "15",
+          "position": "投手"
+        },
+        {
+          "name": "鋼龍",
+          "number": "37",
+          "position": "投手"
+        },
+        {
+          "name": "呂詠臻",
+          "number": "40",
+          "position": "投手"
+        },
+        {
+          "name": "趙璟榮",
+          "number": "42",
+          "position": "投手"
+        },
+        {
+          "name": "羅華韋",
+          "number": "68",
+          "position": "投手"
+        },
+        {
+          "name": "林子昱",
+          "number": "71",
+          "position": "投手"
+        },
+        {
+          "name": "劉家愷",
+          "number": "87",
+          "position": "投手"
+        }
+      ],
+      "catchers": [
+        {
+          "name": "吉力吉撈．鞏冠",
+          "number": "4",
+          "position": "捕手"
+        },
+        {
+          "name": "林辰勳",
+          "number": "9",
+          "position": "捕手"
+        },
+        {
+          "name": "劉時豪",
+          "number": "60",
+          "position": "捕手"
+        },
+        {
+          "name": "蔣少宏",
+          "number": "63",
+          "position": "捕手"
+        }
+      ],
+      "infielders": [
+        {
+          "name": "瑪仕革斯．俄霸律尼",
+          "number": "3",
+          "position": "一壘手"
+        },
+        {
+          "name": "黃柏豪",
+          "number": "10",
+          "position": "一壘手"
+        },
+        {
+          "name": "李凱威",
+          "number": "21",
+          "position": "二壘手"
+        },
+        {
+          "name": "劉俊緯",
+          "number": "23",
+          "position": "游擊手"
+        },
+        {
+          "name": "張政禹",
+          "number": "25",
+          "position": "游擊手"
+        },
+        {
+          "name": "陽念祖",
+          "number": "26",
+          "position": "游擊手"
+        },
+        {
+          "name": "陳思仲",
+          "number": "44",
+          "position": "二壘手"
+        },
+        {
+          "name": "劉基鴻",
+          "number": "46",
+          "position": "三壘手"
+        },
+        {
+          "name": "拿莫．伊漾",
+          "number": "57",
+          "position": "一壘手"
+        }
+      ],
+      "outfielders": [
+        {
+          "name": "林孝程",
+          "number": "1",
+          "position": "右外野手"
+        },
+        {
+          "name": "郭天信",
+          "number": "2",
+          "position": "中外野手"
+        },
+        {
+          "name": "王順和",
+          "number": "24",
+          "position": "中外野手"
+        },
+        {
+          "name": "張祐嘉",
+          "number": "81",
+          "position": "左外野手"
+        },
+        {
+          "name": "冉承霖",
+          "number": "82",
+          "position": "中外野手"
+        }
+      ]
+    }
+  },
+  "AKP": {
+    "team_info": {
+      "name": "台鋼雄鷹",
+      "history": "TSG Hawks(2023 - Now)",
+      "established": "2023",
+      "coach": "洪一中",
+      "home": "高雄市立澄清湖棒球場"
+    },
+    "players": {
+      "coaches": [
+        {
+          "name": "洪一中",
+          "number": "2",
+          "position": "總教練",
+          "photo": "/files/atts/0L087781945186904345/2.png"
+        },
+        {
+          "name": "鄭乃文",
+          "number": "96",
+          "position": "一軍助理打擊教練",
+          "photo": "/files/atts/0L087782087140444501/96.png"
+        },
+        {
+          "name": "沈柏蒼",
+          "number": "35",
+          "position": "牛棚教練",
+          "photo": "/files/atts/0N300536239482009359/35.png"
+        },
+        {
+          "name": "黃甘霖",
+          "number": "53",
+          "position": "外野守備兼跑壘教練",
+          "photo": "/files/atts/0L087782056579933435/53.png"
+        },
+        {
+          "name": "路易士",
+          "number": "23",
+          "position": "打擊教練",
+          "photo": "/files/atts/0L087781943359964875/23.png"
+        },
+        {
+          "name": "蕭任汶",
+          "number": "38",
+          "position": "投手教練",
+          "photo": "/files/atts/0L087781968595205431/38.png"
+        },
+        {
+          "name": "横田久則",
+          "number": "34",
+          "position": "投手統籌教練",
+          "photo": "/files/atts/0N063790466029449051/34橫田久則.JPG"
+        },
+        {
+          "name": "鄧蒔陽",
+          "number": "68",
+          "position": "首席兼內野守備教練",
+          "photo": "/files/atts/0N062477633637712439/68鄧蒔陽.JPG"
+        },
+        {
+          "name": "鄭漢禮",
+          "number": "89",
+          "position": "捕手教練",
+          "photo": "/files/atts/0L087781978760739999/89鄭漢禮.JPG"
+        },
+        {
+          "name": "林大展",
+          "number": "012",
+          "position": "體能教練",
+          "photo": "/files/atts/0O326665255499439586/17林大展.JPG"
+        },
+        {
+          "name": "里隆文",
+          "number": "011",
+          "position": "體能總監教練",
+          "photo": "/theme/client/images/player_no_img.jpg"
+        }
+      ],
+      "pitchers": [
+        {
+          "name": "林詩翔",
+          "number": "5",
+          "position": "投手"
+        },
+        {
+          "name": "謝葆錡",
+          "number": "10",
+          "position": "投手"
+        },
+        {
+          "name": "陳宇宏",
+          "number": "17",
+          "position": "投手"
+        },
+        {
+          "name": "吉田一将",
+          "number": "41",
+          "position": "投手"
+        },
+        {
+          "name": "黃群",
+          "number": "46",
+          "position": "投手"
+        },
+        {
+          "name": "伍祐城",
+          "number": "55",
+          "position": "投手"
+        },
+        {
+          "name": "陳暐皓",
+          "number": "58",
+          "position": "投手"
+        },
+        {
+          "name": "陳柏清",
+          "number": "66",
+          "position": "投手"
+        },
+        {
+          "name": "許育銘",
+          "number": "74",
+          "position": "投手"
+        },
+        {
+          "name": "許峻暘",
+          "number": "84",
+          "position": "投手"
+        },
+        {
+          "name": "巫柏葳",
+          "number": "92",
+          "position": "投手"
+        },
+        {
+          "name": "郭俞延",
+          "number": "98",
+          "position": "投手"
+        }
+      ],
+      "catchers": [
+        {
+          "name": "張肇元",
+          "number": "29",
+          "position": "捕手"
+        },
+        {
+          "name": "陳致嘉",
+          "number": "33",
+          "position": "捕手"
+        },
+        {
+          "name": "陳世嘉",
+          "number": "78",
+          "position": "捕手"
+        }
+      ],
+      "infielders": [
+        {
+          "name": "曾子祐",
+          "number": "1",
+          "position": "游擊手"
+        },
+        {
+          "name": "王博玄",
+          "number": "6",
+          "position": "二壘手"
+        },
+        {
+          "name": "郭永維",
+          "number": "7",
+          "position": "游擊手"
+        },
+        {
+          "name": "林家鋐",
+          "number": "16",
+          "position": "二壘手"
+        },
+        {
+          "name": "黃秉揚",
+          "number": "25",
+          "position": "一壘手"
+        },
+        {
+          "name": "黃劼希",
+          "number": "42",
+          "position": "二壘手"
+        },
+        {
+          "name": "陳飛霖",
+          "number": "79",
+          "position": "游擊手"
+        }
+      ],
+      "outfielders": [
+        {
+          "name": "陳文杰",
+          "number": "3",
+          "position": "中外野手"
+        },
+        {
+          "name": "紀慶然",
+          "number": "24",
+          "position": "右外野手"
+        },
+        {
+          "name": "顏清浤",
+          "number": "37",
+          "position": "中外野手"
+        },
+        {
+          "name": "高聖恩",
+          "number": "50",
+          "position": "中外野手"
+        },
+        {
+          "name": "葉保弟",
+          "number": "73",
+          "position": "左外野手"
+        },
+        {
+          "name": "洪瑋漢",
+          "number": "77",
+          "position": "左外野手"
+        }
+      ]
+    }
+  }
+}

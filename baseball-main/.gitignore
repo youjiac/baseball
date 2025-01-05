@@ -1,0 +1,12 @@
+# Python
+*.pyc
+__pycache__/
+env/
+newenv/
+
+# macOS 系統文件
+.DS_Store
+
+# 虛擬環境資料夾（如果有）
+venv/
+
