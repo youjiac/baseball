@@ -168,10 +168,16 @@ class BaseballCoach:
         if st.session_state.messages and st.session_state.messages[-1]["role"] == "user":
             prompt = st.session_state.messages[-1]["content"]
             with st.chat_message("assistant"):
-                with st.spinner("教練正在思考中..."):  # 添加更明確的加載提示
+                with st.spinner("教練正在思考中..."):
                     response = self.llm_assistant.query(prompt)
                     st.markdown(response)
+                    # 直接生成並播放語音
+                    audio_file = self.speech_processor.text_to_speech(response)
+                    if audio_file:
+                        st.audio(audio_file)
+                        self.speech_processor.cleanup()
                     st.session_state.messages.append({"role": "assistant", "content": response})
+
     def main_page(self):
         """主頁面"""
         try:
